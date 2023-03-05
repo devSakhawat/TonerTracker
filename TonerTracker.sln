@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TonerTracker.API", "TonerTracker.API\TonerTracker.API.csproj", "{32769C8F-4965-4F26-8CE3-FE6ABEFDFA64}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TonerTracker.DAL", "TonerTracker.DAL\TonerTracker.DAL.csproj", "{65905998-B6E1-4423-B2D5-8CB47CFAD916}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TonerTracker.Domain", "TonerTracker.Domain\TonerTracker.Domain.csproj", "{91CE74A4-DFAC-4D21-B4C2-79207CCFF9A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TonerTracker.Utilities", "TonerTracker.Utilities\TonerTracker.Utilities.csproj", "{E99524C6-828F-409D-94FB-471013D20F9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TonerTracker.Infrastructure", "TonerTracker.Infrastructure\TonerTracker.Infrastructure.csproj", "{D2900C94-D8C4-44C9-A9E4-0E9A1593672D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TonerTracker.Web", "TonerTracker.Web\TonerTracker.Web.csproj", "{A1A3EAE7-1460-41C3-81F8-04D42E540BA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32769C8F-4965-4F26-8CE3-FE6ABEFDFA64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32769C8F-4965-4F26-8CE3-FE6ABEFDFA64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32769C8F-4965-4F26-8CE3-FE6ABEFDFA64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32769C8F-4965-4F26-8CE3-FE6ABEFDFA64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65905998-B6E1-4423-B2D5-8CB47CFAD916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65905998-B6E1-4423-B2D5-8CB47CFAD916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65905998-B6E1-4423-B2D5-8CB47CFAD916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65905998-B6E1-4423-B2D5-8CB47CFAD916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91CE74A4-DFAC-4D21-B4C2-79207CCFF9A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91CE74A4-DFAC-4D21-B4C2-79207CCFF9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91CE74A4-DFAC-4D21-B4C2-79207CCFF9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91CE74A4-DFAC-4D21-B4C2-79207CCFF9A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E99524C6-828F-409D-94FB-471013D20F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E99524C6-828F-409D-94FB-471013D20F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E99524C6-828F-409D-94FB-471013D20F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E99524C6-828F-409D-94FB-471013D20F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2900C94-D8C4-44C9-A9E4-0E9A1593672D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2900C94-D8C4-44C9-A9E4-0E9A1593672D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2900C94-D8C4-44C9-A9E4-0E9A1593672D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2900C94-D8C4-44C9-A9E4-0E9A1593672D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1A3EAE7-1460-41C3-81F8-04D42E540BA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1A3EAE7-1460-41C3-81F8-04D42E540BA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1A3EAE7-1460-41C3-81F8-04D42E540BA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1A3EAE7-1460-41C3-81F8-04D42E540BA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A75CABB-C01F-4B64-B544-05D31527232D}
+	EndGlobalSection
+EndGlobal

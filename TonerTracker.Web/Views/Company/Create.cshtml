@@ -1,0 +1,52 @@
+﻿@model TonerTracker.Domain.Dto.CompanyDto
+@using TonerTracker.Utilities.Constant
+
+@{
+   ViewData["Title"] = "Create";
+}
+
+<div class="container-fluid pt-4 px-4">
+   <div class="row g-4">
+      <div class="col-12">
+         <div class="theme-bg-secondary theme-font-color rounded h-100 p-4">
+            <h1 class="mb-4 display-6">@ViewBag.Title @Model.CompanyName</h1>
+            <!--ALERT-->
+            @if (Convert.ToString(TempData[SessionConstant.Message]).Length > 1)
+            {
+               <div class="alert alert-success alert-dismissible text-center fade show" id="alert" role="alert">
+                  <i class="bi bi-check-circle-fill"></i>&nbsp; @TempData[SessionConstant.Message]
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            }
+            <form method="post" enctype="multipart/form-data" asp-action="Create">
+               <!-- Company Name -->
+               <div class="row mb-3">
+                  <label for="companyName" class="col-4 col-form-label" asp-for="CompanyName"></label>
+                  <div class="col-8">
+                     <input type="text" class="form-control theme-black" id="companyName" asp-for="CompanyName" placeholder="Enter Company Name.." />
+                     <span asp-validation-for="CompanyName" class="text-danger"></span>
+                  </div>
+               </div>
+               <!-- Company Address -->
+               <div class="row mb-3">
+                  <label for="address" class="col-4 col-form-label" asp-for="Address"></label>
+                  <div class="col-8">
+                     <input type="text" class="form-control theme-black" id="address" asp-for="Address" placeholder="Enter Company Address.." />
+                     <span asp-validation-for="Address" class="text-danger"></span>
+                  </div>
+               </div>
+
+               <!-- Button -->
+               <button type="submit" class="btn btn-primary mt-2 me-2"><i class="fas fa-plus-square"></i> &nbsp;Save </button>
+               <a asp-action="Index" class="btn btn-success mt-2"><i class="fas fa-caret-square-left"></i> &nbsp;Back To List</a>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+   window.setTimeout(function () {
+      $('#alert').remove('fast');
+   }, 2000);
+</script>

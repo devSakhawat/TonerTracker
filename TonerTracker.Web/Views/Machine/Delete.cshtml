@@ -1,0 +1,102 @@
+﻿@model TonerTracker.Domain.Dto.MachineDto
+@using TonerTracker.Domain.Entity
+@using TonerTracker.Utilities.Constant
+
+@{
+   ViewData["Title"] = "Delete";
+}
+
+<div class="container-fluid pt-4 px-4">
+   <div class="row g-4">
+      <div class="col-12">
+         <div class="theme-bg-secondary theme-font-color rounded h-100 p-4">
+            @*<h1 class="mb-4 display-6">@ViewBag.Title @Model.MachineSerialNo</h1>*@
+            <!--ALERT-->
+            @if (Convert.ToString(TempData[SessionConstant.Message]).Length > 1)
+            {
+               <div class="alert alert-success alert-dismissible text-center fade show" id="alert" role="alert">
+                  <i class="bi bi-check-circle-fill"></i>&nbsp; @TempData[SessionConstant.Message]
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            }
+            <!--DELETE Branch-->
+            <div class="card theme-bg-secondary theme-font-color shadow-sm mb-1">
+               <div class="card-body">
+                  <h2 class="text-danger text-center display-6">Are you sure?</h2>
+                  
+                  <!-- BrachName-->
+                  <div class="row">
+                     <div class="col-6 text-end">@Html.DisplayNameFor(model => model.Branch.BranchName) : </div>
+                     <div class="col-6 text-start">@Html.DisplayFor(model => model.Branch.BranchName)</div>
+                  </div>
+                  <!-- MachineModelNo-->
+                  <div class="row">
+                     <div class="col-6 text-end">@Html.DisplayNameFor(model => model.MachineModelNo) : </div>
+                     <div class="col-6 text-start">@Html.DisplayFor(model => model.MachineModelNo)</div>
+                  </div>
+                  <!-- MachineSerialNo-->
+                  <div class="row">
+                     <div class="col-6 text-end">@Html.DisplayNameFor(model => model.MachineSerialNo) : </div>
+                     <div class="col-6 text-start">@Html.DisplayFor(model => model.MachineSerialNo)</div>
+                  </div>
+                  <!-- PerPaperRate -->
+                  <div class="row">
+                     <div class="col-6 text-end">@Html.DisplayNameFor(model => model.PerPaperRate) : </div>
+                     <div class="col-6 text-start">@Html.DisplayFor(model => model.PerPaperRate)</div>
+                  </div>
+                  <!-- ColourType-->
+                  <div class="row">
+                     <div class="col-6 text-end">@Html.DisplayNameFor(model => model.ColourType) : </div>
+                     <div class="col-6 text-start">@Html.DisplayFor(model => model.ColourType)</div>
+                  </div>
+                  @if (Model.ColourType == ColourType.BW)
+                  {
+                     <!-- BWSerialNo-->
+                     <div class="row">
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.BWSerialNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.BWSerialNo)</div>
+                     </div>
+                  }
+                  @if (Model.ColourType == ColourType.Colour)
+                  {
+                     <!-- CyanSerialNo-->
+                     <div class="row">
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.CyanSerialNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.CyanSerialNo)</div>
+                     </div>
+                     <!-- MagentaSerialNo -->
+                     <div class="row">
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.MagentaSerialNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.MagentaSerialNo)</div>
+                     </div>
+                     <!-- YellowSerialNo -->
+                     <div class="row">
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.YellowSerialNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.YellowSerialNo)</div>
+                     </div>
+                     <!-- BlackSerialNo -->
+                     <div class="row">
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.BlackSerialNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.BlackSerialNo)</div>
+                     </div>
+                  }
+                  <!--ACTION:-->
+                  <div class="row mt-2">
+                     <form asp-action="Delete" class="text-center">
+                        <input type="hidden" asp-for="ID" />
+                        <button type="submit" class="btn btn-primary mt-2 me-2"><i class="fas fa-plus-square"></i> &nbsp;Save </button>
+                        <a asp-action="Index" asp-route-branchId="@Model.BranchID" class="btn btn-secondary mt-2"><i class="fas fa-long-arrow-alt-left"></i> &nbsp;Back To List</a>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+  window.setTimeout(function () {
+      $('#alert').remove('fast');
+  }, 2000);
+</script>

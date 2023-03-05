@@ -1,0 +1,152 @@
+﻿@using TonerTracker.Domain.Entity
+@using TonerTracker.Utilities.Constant
+@model IEnumerable<Machine>
+
+@{
+   ViewBag.Title = "Machine List";
+}
+
+<!-- Branch content -->
+<div class="container-fluid pt-4 px-4">
+   <div class="theme-bg-secondary theme-font-color text-center rounded p-4">
+      <!-- Title -->
+      <div class="d-flex align-items-center justify-content-between mb-4">
+         <h1 class="mb-0 display-6">@ViewBag.Title</h1>
+         <a class="theme-anchor" asp-controller="Machine" asp-action="Create" asp-route-branchId="@Model.ToList().First().BranchID">Add New Machine</a>
+      </div>
+      <!--ALERT-->
+      @if (Convert.ToString(TempData[SessionConstant.Message]).Length > 1)
+      {
+         <div class="alert alert-success alert-dismissible text-center fade show" id="alert" role="alert">
+            <i class="bi bi-check-circle-fill"></i>&nbsp; @TempData[SessionConstant.Message]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+      }
+
+      <div class="table-responsive">
+         <h2 class="text-center display-6">Black and White Machine</h2>
+         <table class="table text-start align-middle table-bordered table-hover mb-5">
+            <thead>
+               <tr class="text-white theme-font-color">
+                  <th scope="col">Branch Name</th>
+                  <th scope="col">Machine Model</th>
+                  <th scope="col">Machine Serial No</th>
+                  <th scope="col">Paper Rate</th>
+                  @*<th scope="col">Colour Type</th>*@
+                  <th scope="col">BW SerialNo</th>
+                  <th scope="col">Action</th>
+               </tr>
+            </thead>
+            <tbody class="theme-font-color">
+               @foreach (var item in Model)
+               {
+                  if (item.ColourType == ColourType.BW)
+                  {
+                     <tr>
+                        <td>@item.Branch.BranchName</td>
+                        <td>
+                           <a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.MachineModelNo</a>
+                        </td>
+                        <td>
+                           <a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.MachineSerialNo</a>
+                        </td>
+                        @*<td>@item.ColourType</td>*@
+                        <td>@item.BWSerialNo</td>
+                        <td>@item.BWPaperRate</td>
+                        <td>
+                           <a asp-action="Update" asp-route-id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
+                              <i class="fas fa-pen"></i>
+                              @*Update*@
+                           </a>
+                           <a asp-action="Detail" asp-route-id="@item.ID" class="btn btn-sm btn-success mt-1 mb-1">
+                              <i class="fas fa-info-circle"></i>
+                              @*Detail*@
+                           </a>
+                           <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger mt-1 mb-1">
+                              <i class="fas fa-trash"></i>
+                              @*Delete*@
+                           </a>
+                           <a asp-controller="TonerDelivery" asp-action="Create" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
+                              <i class="fas fa-list-ul"></i>
+                              Toner Delivery
+                           </a>
+                        </td>
+                     </tr>
+                  }
+               }
+            </tbody>
+         </table>
+
+         <h2 class="text-center display-6">Colour Machine</h2>
+         <table class="table text-start align-middle table-bordered table-hover mb-2">
+            <thead>
+               <tr class="text-white theme-font-color">
+                  <th scope="col">Branch Name</th>
+                  <th scope="col">Machine Model</th>
+                  <th scope="col">Machine Serial No</th>
+                  <th scope="col">Paper Rate</th>
+                  @*<th scope="col">Colour Type</th>*@
+                  <th scope="col">Cyan SerialNo</th>
+                  <th scope="col">Magenta SerialNo</th>
+                  <th scope="col">Yellow SerialNo</th>
+                  <th scope="col">Black SerialNo</th>
+                  <th scope="col">Action</th>
+               </tr>
+            </thead>
+            <tbody class="theme-font-color">
+               @foreach (var item in Model)
+               {
+                  if (item.ColourType == ColourType.Colour)
+                  {
+                     <tr>
+                        <td>@item.Branch.BranchName</td>
+                        <td>
+                           <a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.MachineModelNo</a>
+                        </td>
+                        <td>
+                           <a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.MachineSerialNo</a>
+                        </td>
+                        <td>@item.ColourPaperRate</td>
+                        @*<td>@item.ColourType</td>*@
+                        <td>@item.CyanSerialNo</td>
+                        <td>@item.MagentaSerialNo</td>
+                        <td>@item.YellowSerialNo</td>
+                        <td>@item.BlackSerialNo</td>
+                        <td>
+                           <a asp-action="Update" asp-route-Id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
+                              <i class="fas fa-pen"></i>
+                              @*Update*@
+                           </a>
+                           <a asp-action="Detail" asp-route-Id="@item.ID" class="btn btn-sm btn-success mt-1 mb-1">
+                              <i class="fas fa-info-circle"></i>
+                              @*Detail*@
+                           </a>
+                           <a asp-action="Delete" asp-route-Id="@item.ID" class="btn btn-sm btn-danger mt-1 mb-1">
+                              <i class="fas fa-trash"></i>
+                              @*Delete*@
+                           </a>
+                           <a asp-controller="TonerDelivery" asp-action="Create" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
+                              <i class="fas fa-list-ul"></i>
+                              Toner Delivery
+                           </a>
+                        </td>
+                     </tr>
+                  }
+               }
+            </tbody>
+         </table>        
+         <div class="text-start">
+            <a asp-controller="Branch" asp-action="Index" asp-route-companyId="@Model.ToList().First().Branch.CompanyID" class="btn btn-secondary mt-3 mb-1 text-start ">
+               <i class="fas fa-long-arrow-alt-left"></i> &nbsp;Back To Branch List
+            </a>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Branch content -->
+
+<script type="text/javascript">
+  window.setTimeout(function () {
+      $('#alert').remove('fast');
+  }, 2000);
+</script>

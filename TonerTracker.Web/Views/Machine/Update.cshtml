@@ -1,0 +1,201 @@
+﻿@model TonerTracker.Domain.Dto.MachineDto
+@using TonerTracker.Utilities.Constant
+
+@{
+   ViewData["Title"] = "Update Machine";
+}
+
+<div class="container-fluid pt-4 px-4">
+   <div class="row g-4">
+      <div class="col-12">
+         <div class="theme-bg-secondary theme-font-color rounded h-100 p-4">
+            <h1 class="mb-4 display-6">@ViewBag.Title @Model.MachineSerialNo</h1>
+            <!--ALERT-->
+            @if (Convert.ToString(TempData[SessionConstant.Message]).Length > 1)
+            {
+               <div class="alert alert-success alert-dismissible text-center fade show" id="alert" role="alert">
+                  <i class="bi bi-check-circle-fill"></i>&nbsp; @TempData[SessionConstant.Message]
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            }
+            <form method="post" enctype="multipart/form-data" asp-action="Update">
+               <!-- MachineId -->
+               <input type="text" class="form-control theme-black" asp-for="MachineModelNo" hidden />
+               <!-- Branch Name -->
+               <div class="row mb-3">
+                  <label for="branchId" class="col-4 col-form-label" asp-for="BranchID"></label>
+                  <div class="col-8">
+                     <select asp-for="BranchID" asp-items="@ViewBag.BranchId" id="branchId" class="form-control theme-black">
+                        <option>Select Branch</option>
+                     </select>
+                     <span asp-validation-for="BranchID" class="text-danger"></span>
+                  </div>
+               </div>
+               <!-- Machine Model -->
+               <div class="row mb-3">
+                  <label for="machineModel" class="col-4 col-form-label" asp-for="MachineModelNo"></label>
+                  <div class="col-8">
+                     <input type="text" class="form-control theme-black" id="machineModel" asp-for="MachineModelNo" placeholder="Enter machine model no.." />
+                     <span asp-validation-for="MachineModelNo" class="text-danger"></span>
+                  </div>
+               </div>
+
+               <!-- Machine Serial No -->
+               <div class="row mb-3">
+                  <label for="machineSerial" class="col-4 col-form-label" asp-for="MachineSerialNo"></label>
+                  <div class="col-8">
+                     <input type="text" class="form-control theme-black" id="machineSerial" asp-for="MachineSerialNo" placeholder="Enter machine serial no.." />
+                     <span asp-validation-for="MachineSerialNo" class="text-danger"></span>
+                  </div>
+               </div>
+
+               <!-- Colour Type -->
+               <div class="row mb-3" id="MachineColourType">
+                  <label for="colourType" class="col-4 col-form-label" asp-for="ColourType"></label>
+                  <div class="col-8">
+                     <select asp-for="ColourType" asp-items="@Html.GetEnumSelectList<TonerTracker.Domain.Entity.ColourType>()" onchange="ColourTypeToner()" id="colourType" class="form-control theme-black">
+                        <option selected>Select Colour Type</option>
+                     </select>
+                  </div>
+               </div>
+                <!-- BW Toner Serial No -->
+               @if (Model.ColourType == TonerTracker.Domain.Entity.ColourType.BW)
+               {
+                  <div class="row mb-3 bwToner">
+                     <label for="bwSerialNo" class="col-4 col-form-label" asp-for="BWSerialNo"></label>
+                     <div class="col-8">
+                        <input type="text" class="form-control theme-black" id="bwSerialNo" asp-for="BWSerialNo" placeholder="Enter bw serial no.." />
+                        <span asp-validation-for="BWSerialNo" class="text-danger"></span>
+                     </div>
+                  </div>
+               }
+
+               @if (Model.ColourType == TonerTracker.Domain.Entity.ColourType.Colour)
+               {
+                  <!-- Cyan Toner Serial No -->
+                  <div class="row mb-3 cyanToner">
+                     <label for="cyanSerialNo" class="col-4 col-form-label" asp-for="CyanSerialNo"></label>
+                     <div class="col-8">
+                        <input type="text" class="form-control theme-black" id="cyanSerialNo" asp-for="CyanSerialNo" placeholder="Enter cyan serial no.." />
+                        <span asp-validation-for="CyanSerialNo" class="text-danger"></span>
+                     </div>
+                  </div>
+
+                  <!-- Magenta Toner Serial No -->
+                  <div class="row mb-3 magentaToner">
+                     <label for="magentaSerialNo" class="col-4 col-form-label" asp-for="MagentaSerialNo"></label>
+                     <div class="col-8">
+                        <input type="text" class="form-control theme-black" id="magentaSerialNo" asp-for="MagentaSerialNo" placeholder="Enter magenta serial no.." />
+                        <span asp-validation-for="MagentaSerialNo" class="text-danger"></span>
+                     </div>
+                  </div>
+
+                  <!-- Yellow Toner Serial No -->
+                  <div class="row mb-3 yellowToner">
+                     <label for="yellowSerialNo" class="col-4 col-form-label" asp-for="YellowSerialNo"></label>
+                     <div class="col-8">
+                        <input type="text" class="form-control theme-black" id="yellowSerialNo" asp-for="YellowSerialNo" placeholder="Enter yellow serial no.." />
+                        <span asp-validation-for="YellowSerialNo" class="text-danger"></span>
+                     </div>
+                  </div>
+
+                  <!-- Black Toner Serial No -->
+                  <div class="row mb-3 blackToner">
+                     <label for="blackSerialNo" class="col-4 col-form-label" asp-for="BlackSerialNo"></label>
+                     <div class="col-8">
+                        <input type="text" class="form-control theme-black" id="blackSerialNo" asp-for="BlackSerialNo" placeholder="Enter black serial no.." />
+                        <span asp-validation-for="BlackSerialNo" class="text-danger"></span>
+                     </div>
+                  </div>
+               }
+
+               <!-- Button -->
+               <button type="submit" class="btn btn-primary mt-3 mb-2 me-2"><i class="fas fa-plus-square"></i> &nbsp;Save </button>
+               <a asp-controller="Machine" asp-action="Index" asp-route-branchId="@Model.BranchID" class="btn btn-secondary mt-3 mb-2 text-start ">
+                  <i class="fas fa-long-arrow-alt-left"></i> &nbsp;Back To Machine List
+               </a>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+  window.setTimeout(function () {
+      $('#alert').remove('fast');
+  }, 2000);
+
+  var baseApi = "https://localhost:7252/toner-tracker/";
+
+  function ColourTypeToner() {
+      var colourType = $("#colourType option:selected").val();
+      if (colourType == "1") {
+          $("#MachineColourType").nextAll(".bwPaperRate .colourPaperRate .bwToner, .cyanToner, .magentaToner, .yellowToner, .blackToner").remove();
+          $("#MachineColourType").after(`<div class="row mb-3 bwPaperRate">
+                                              <label for="bwPaperRate" class="col-4 col-form-label" asp-for="BWPaperRate"></label>
+                                              <div class="col-8">
+                                                <input type="text" class="form-control theme-black" id="bwPaperRate" asp-for="BWPaperRate" placeholder="Enter Black & White Paper Rate.." />
+                                                <span asp-validation-for="BWPaperRate" class="text-danger"></span>
+                                              </div>
+                                            </div>
+                                            <div class="row mb-3 bwToner">
+                                               <label for="bwSerialNo" class="col-4 col-form-label" asp-for="BWSerialNo">BW Serial No</label>
+                                               <div class="col-8">
+                                                  <input type="text" class="form-control theme-black" id="bwSerialNo" placeholder="Enter bw serial no.." data-val="true" data-val-required="BWSerialNo value required" name="BWSerialNo" value="">
+                                                  <span class="text-danger field-validation-valid" data-valmsg-for="BWSerialNo" data-valmsg-replace="true"></span>
+                                               </div>
+                                            </div>`);
+
+      }
+      else if (colourType == "2") {
+          $("#MachineColourType").nextAll(".bwPaperRate .colourPaperRate .bwToner, .cyanToner, .magentaToner, .yellowToner, .blackToner").remove();
+          $("#MachineColourType").after(`<!-- ColourPaperPerRate -->
+                                          <div class="row mb-3 colourPaperRate">
+                                            <label for="colourPaperRate" class="col-4 col-form-label" asp-for="ColourPaperRate"></label>
+                                            <div class="col-8">
+                                              <input type="text" class="form-control theme-black" id="colourPaperRate" asp-for="ColourPaperRate" placeholder="Enter Colur Paper Rate.." />
+                                              <span asp-validation-for="ColourPaperRate" class="text-danger"></span>
+                                            </div>
+                                          </div>
+                                           <div class="row mb-3 cyanToner">
+                                               <label for="cyanSerialNo" class="col-4 col-form-label" asp-for="CyanSerialNo">Cyan Serial No</label>
+                                               <div class="col-8">
+                                                  <input type="text" class="form-control theme-black" id="cyanSerialNo" placeholder="Enter cyan serial no.." data-val="true" data-val-required="SerialNo value required" name="CyanSerialNo" value="">
+                                                  <span class="text-danger field-validation-valid" data-valmsg-for="CyanSerialNo" data-valmsg-replace="true"></span>
+                                               </div>
+                                            </div>
+
+                                            <div class="row mb-3 magentaToner">
+                                               <label for="magentaSerialNo" class="col-4 col-form-label" asp-for="MagentaSerialNo">Magenta Serial No</label>
+                                               <div class="col-8">
+                                                  <input type="text" class="form-control theme-black" id="magentaSerialNo" placeholder="Enter magenta serial no.." data-val="true" data-val-required="MagentaSerialNo value required" name="MagentaSerialNo" value="">
+                                                  <span class="text-danger field-validation-valid" data-valmsg-for="MagentaSerialNo" data-valmsg-replace="true"></span>
+                                               </div>
+                                            </div>
+
+                                            <div class="row mb-3 yellowToner">
+                                               <label for="yellowSerialNo" class="col-4 col-form-label" asp-for="YellowSerialNo">Yellow Serial No</label>
+                                               <div class="col-8">
+                                                  <input type="text" class="form-control theme-black" id="yellowSerialNo" placeholder="Enter yellow serial no.." data-val="true" data-val-required="YellowSerialNo value required" name="YellowSerialNo" value="">
+                                                  <span class="text-danger field-validation-valid" data-valmsg-for="YellowSerialNo" data-valmsg-replace="true"></span>
+                                               </div>
+                                            </div>
+
+                                            <div class="row mb-3 blackToner">
+                                               <label for="blackSerialNo" class="col-4 col-form-label" asp-for="BlackSerialNo">Black Serial No</label>
+                                               <div class="col-8">
+                                                  <input type="text" class="form-control theme-black" id="blackSerialNo" placeholder="Enter black serial no.." data-val="true" data-val-required="BlackSerialNo value required" name="BlackSerialNo" value="">
+                                                  <span class="text-danger field-validation-valid" data-valmsg-for="BlackSerialNo" data-valmsg-replace="true"></span>
+                                               </div>
+                                            </div>`)
+      }
+  };
+</script>
+
+
+
+
+
+
+
+
