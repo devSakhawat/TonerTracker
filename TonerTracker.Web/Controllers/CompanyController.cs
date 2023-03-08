@@ -112,7 +112,7 @@ namespace TonerTracker.Web.Controllers
             else
             {
                TempData[SessionConstant.Message] = MessageConstants.RecordUpdated;
-               return View(model);
+               return RedirectToAction(nameof(Index));
             }
          }
          else

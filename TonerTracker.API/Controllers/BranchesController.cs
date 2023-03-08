@@ -92,6 +92,14 @@ namespace TonerTracker.API.Controllers
             if (branch == null)
                return StatusCode(StatusCodes.Status404NotFound, MessageConstants.NoMatchFoundError);
 
+            //BranchDto branchDto = new BranchDto
+            //{
+            //   ID = branch.ID,
+            //   BranchName = branch.BranchName,
+            //   Address = branch.Address,
+            //   CompanyName = branch.Company.CompanyName
+            //};
+
             return Ok(branch);
          }
          catch (Exception ex)
@@ -104,11 +112,11 @@ namespace TonerTracker.API.Controllers
       #region UpdateBranch
       [Route(RouteConstant.UpdateBranch)]
       [HttpPut]
-      public async Task<IActionResult> UpdateBranch(int id, BranchDto model)
+      public async Task<IActionResult> UpdateBranch(int key, Branch model)
       {
          try
          {
-            if (id != model.ID)
+            if (key != model.ID)
                return StatusCode(StatusCodes.Status400BadRequest, MessageConstants.UnauthorizedAttemptOfRecordUpdateError);
 
             Branch branch = new Branch
@@ -138,7 +146,7 @@ namespace TonerTracker.API.Controllers
       #region DeleteBranch
       [Route(RouteConstant.DeleteBranch)]
       [HttpPatch]
-      public async Task<IActionResult> DeleteBranch(BranchDto model)
+      public async Task<IActionResult> DeleteBranch(Branch model)
       {
          try
          {

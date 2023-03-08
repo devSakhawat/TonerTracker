@@ -1,4 +1,4 @@
-﻿@model TonerTracker.Domain.Dto.BranchDto
+﻿@model TonerTracker.Domain.Entity.Branch
 @using TonerTracker.Utilities.Constant
 
 @{
@@ -13,14 +13,15 @@
              <!--ALERT-->
             @if (Convert.ToString(TempData[SessionConstant.Message]).Length > 1)
             {
-                  <div class="alert alert-success alert-dismissible text-center fade show" id="alert" role="alert">
-                     <i class="bi bi-check-circle-fill"></i>&nbsp; @TempData[SessionConstant.Message]
-                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
+               <div class="alert alert-success alert-dismissible text-center fade show" id="alert" role="alert">
+                  <i class="bi bi-check-circle-fill"></i>&nbsp; @TempData[SessionConstant.Message]
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
             }
             <form method="post" enctype="multipart/form-data" asp-action="Update">
                <!-- Branch ID -->
                <input asp-for="ID" hidden />
+
                <!-- CompanyID -->
                <div class="row mb-3">
                   <label for="companyID" class="col-4 col-form-label" asp-for="CompanyID"></label>
@@ -31,7 +32,8 @@
                      <span asp-validation-for="CompanyID" class="text-danger"></span>
                   </div>
                </div>
-               <!-- Company Name -->
+
+               <!-- Branch Name -->
                <div class="row mb-3">
                   <label for="branchName" class="col-4 col-form-label" asp-for="BranchName"></label>
                   <div class="col-8">
@@ -39,6 +41,7 @@
                      <span asp-validation-for="BranchName" class="text-danger"></span>
                   </div>
                </div>
+
                <!-- Branch Address -->
                <div class="row mb-3">
                   <label for="address" class="col-4 col-form-label" asp-for="Address"></label>
@@ -50,7 +53,7 @@
 
                <!-- Button -->
                <button type="submit" class="btn btn-primary mt-2 me-2"><i class="fas fa-plus-square"></i> &nbsp;Save </button>
-               <a asp-action="Index" class="btn btn-success mt-2"><i class="fas fa-caret-square-left"></i> &nbsp;Back To List</a>
+               <a asp-action="Index" asp-route-companyId="@Model.CompanyID" class="btn btn-success mt-2"><i class="fas fa-caret-square-left"></i> &nbsp;Back To List</a>
             </form>
          </div>
       </div>
