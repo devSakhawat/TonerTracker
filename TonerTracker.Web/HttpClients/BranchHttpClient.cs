@@ -46,41 +46,41 @@ namespace TonerTracker.Web.HttpClients
       #endregion  ReadBranches
 
       #region ReadBranchByKey
-      public async Task<BranchDto> ReadBranchByKey(int id)
+      public async Task<Branch> ReadBranchByKey(int id)
       {
          var response = await client.GetAsync($"{baseApi}branch/key/" + id + "");
          if (!response.IsSuccessStatusCode)
-            return new BranchDto();
+            return new Branch();
          var result = await response.Content.ReadAsStringAsync();
-         var branch = JsonConvert.DeserializeObject<BranchDto>(result);
+         var branch = JsonConvert.DeserializeObject<Branch>(result);
          return branch;
       }
       #endregion ReadBranchByKey
 
       #region UpdateBranch
-      public async Task<BranchDto> UpdateBranch(BranchDto model)
+      public async Task<Branch> UpdateBranch(Branch model)
       {
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PutAsync($"{baseApi}branch/" + model.ID, content);
-         if (response.IsSuccessStatusCode)
-            return new BranchDto();
+         if (!response.IsSuccessStatusCode)
+            return new Branch();
          string result = await response.Content.ReadAsStringAsync();
-         var branch = JsonConvert.DeserializeObject<BranchDto>(result);
+         var branch = JsonConvert.DeserializeObject<Branch>(result);
          return branch;
       }
       #endregion UpdateBranch
 
       #region DeleteBranch
-      public async Task<BranchDto> DeleteBranch(BranchDto model)
+      public async Task<Branch> DeleteBranch(Branch model)
       {
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PatchAsync($"{baseApi}branch/" + model.ID, content);
          if (!response.IsSuccessStatusCode)
-            return new BranchDto();
+            return new Branch();
          string result = await response.Content.ReadAsStringAsync();
-         var branch = JsonConvert.DeserializeObject<BranchDto>(result);
+         var branch = JsonConvert.DeserializeObject<Branch>(result);
          return branch;
       }
       #endregion DeleteBranch

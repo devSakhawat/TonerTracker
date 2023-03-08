@@ -2,14 +2,14 @@
 @using TonerTracker.Utilities.Constant
 
 @{
-   ViewData["Title"] = "Detail of";
+   ViewData["Title"] = "Detail";
 }
 
 <div class="container-fluid pt-4 px-4">
    <div class="row g-4">
       <div class="col-12">
          <div class="theme-bg-secondary theme-font-color rounded h-100 p-4">
-            <h1 class="mb-4 display-6">@ViewBag.Title @Model.CompanyName</h1>
+            <h1 class="mb-4 display-6">Detail of @Model.CompanyName</h1>
             <!--ALERT-->
             @if (Convert.ToString(TempData[SessionConstant.Message]).Length > 1)
             {
