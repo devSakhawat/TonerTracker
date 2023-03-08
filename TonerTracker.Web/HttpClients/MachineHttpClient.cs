@@ -98,7 +98,7 @@ namespace TonerTracker.Web.HttpClients
       #region MachinesByBranchId
       public async Task<List<Machine>> MachinesByBranchId(int branchId)
       {
-         var response = await client.GetAsync($"{baseApi}machine/branch/" + branchId + "");
+         var response = await client.GetAsync($"{baseApi}machine/branch/" + branchId);
 
          if (!response.IsSuccessStatusCode)
             return new List<Machine>();

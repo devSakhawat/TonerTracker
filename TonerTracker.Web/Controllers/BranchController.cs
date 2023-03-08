@@ -19,7 +19,6 @@ namespace TonerTracker.Web.Controllers
 
       #region Create
       [HttpGet]
-      //public async Task<IActionResult> Create()
       public async Task<IActionResult> Create(int companyId)
       {
          var company = await new CompanyHttpClient(client).ReadCompanyByKey(companyId);
@@ -58,7 +57,6 @@ namespace TonerTracker.Web.Controllers
 
       #region Index
       [HttpGet]
-      //public async Task<IActionResult> Index()
       public async Task<IActionResult> Index(int companyId)
       {
          try
@@ -72,7 +70,7 @@ namespace TonerTracker.Web.Controllers
             //List<Branch> branches = await new BranchHttpClient(client).ReadBranches();
             List<Branch> branches = await new BranchHttpClient(client).BranchesByCompanyID(companyId);
 
-            //ViewBag.CompanyId = companyId;
+            ViewBag.CompanyId = companyId;
 
             if(branches == null || branches.Count == 0)
             {
@@ -97,12 +95,12 @@ namespace TonerTracker.Web.Controllers
          if (id <= 0)
          {
             TempData[SessionConstant.Message] = MessageConstants.UnauthorizedAttemptOfRecordUpdateError;
-            return RedirectToAction(nameof(Index));
+            return View();
          }
 
          var branch = await new BranchHttpClient(client).ReadBranchByKey(id);
 
-         ViewData["CompanyID"] = new SelectList(await new CompanyHttpClient(client).ReadCompanies(), "ID", "CompanyName", branch.CompanyID);    
+         ViewData["CompanyID"] = new SelectList(await new CompanyHttpClient(client).ReadCompanies(), "ID", "CompanyName", branch.CompanyID);
 
          if(branch == null || branch.ID == 0)
          {
@@ -113,7 +111,7 @@ namespace TonerTracker.Web.Controllers
       }
 
       [HttpPost]
-      public async Task<IActionResult> Update(BranchDto model)
+      public async Task<IActionResult> Update(Branch model)
       {
          if (ModelState.IsValid)
          {
@@ -126,7 +124,7 @@ namespace TonerTracker.Web.Controllers
             else
             {
                TempData[SessionConstant.Message] = MessageConstants.RecordUpdated;
-               return RedirectToAction(nameof(Index));
+               return RedirectToAction("Index", new { companyId = model.CompanyID });
             }
          }
          else
@@ -158,7 +156,7 @@ namespace TonerTracker.Web.Controllers
       }
 
       [HttpPost]
-      public async Task<IActionResult> Delete(BranchDto model)
+      public async Task<IActionResult> Delete(Branch model)
       {
          try
          {
@@ -186,7 +184,7 @@ namespace TonerTracker.Web.Controllers
             else
             {
                TempData[SessionConstant.Message] = MessageConstants.RecordDeleted;
-               return RedirectToAction(nameof(Index));
+               return RedirectToAction("Index", new { companyId = model.CompanyID});
             }
          }
          catch (Exception ex)
@@ -204,7 +202,7 @@ namespace TonerTracker.Web.Controllers
          if(id <= 0 )
          {
             TempData[SessionConstant.Message] = MessageConstants.InvalidParameterError;
-            return RedirectToAction(nameof(Index));
+            return View();
          }
 
          var branch = await new BranchHttpClient(client).ReadBranchByKey(id);
@@ -212,7 +210,7 @@ namespace TonerTracker.Web.Controllers
          if(branch.ID == 0 || branch == null)
          {
             TempData[SessionConstant.Message] = MessageConstants.NoMatchFoundError;
-            return RedirectToAction(nameof(Index));
+            return View();
          }
          return View(branch);
       }

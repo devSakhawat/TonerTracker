@@ -12,7 +12,7 @@
       <!-- Title -->
       <div class="d-flex align-items-center justify-content-between mb-4">
          <h1 class="mb-0 display-6">@ViewBag.Title</h1>
-         <a class="theme-anchor" asp-controller="Machine" asp-action="Create" asp-route-branchId="@Model.ToList().First().BranchID">Add New Machine</a>
+         @*<a class="theme-anchor" asp-controller="Machine" asp-action="Create" asp-route-branchId="@Model.ToList().First().BranchID">Add New Machine</a>*@
       </div>
       <!--ALERT-->
       @if (Convert.ToString(TempData[SessionConstant.Message]).Length > 1)
@@ -31,17 +31,15 @@
                   <th scope="col">Branch Name</th>
                   <th scope="col">Machine Model</th>
                   <th scope="col">Machine Serial No</th>
-                  <th scope="col">Paper Rate</th>
-                  @*<th scope="col">Colour Type</th>*@
-                  <th scope="col">BW SerialNo</th>
+                  <th scope="col">Colour Type</th>
                   <th scope="col">Action</th>
                </tr>
             </thead>
             <tbody class="theme-font-color">
                @foreach (var item in Model)
                {
-                  if (item.ColourType == ColourType.BW)
-                  {
+@*                  if (item.ColourType == ColourType.BW)
+                  {*@
                      <tr>
                         <td>@item.Branch.BranchName</td>
                         <td>
@@ -50,9 +48,7 @@
                         <td>
                            <a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.MachineSerialNo</a>
                         </td>
-                        @*<td>@item.ColourType</td>*@
-                        <td>@item.BWSerialNo</td>
-                        <td>@item.BWPaperRate</td>
+                        <td>@item.ColourType</td>
                         <td>
                            <a asp-action="Update" asp-route-id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
                               <i class="fas fa-pen"></i>
@@ -72,7 +68,7 @@
                            </a>
                         </td>
                      </tr>
-                  }
+                  @*}*@
                }
             </tbody>
          </table>
