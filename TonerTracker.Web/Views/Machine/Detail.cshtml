@@ -44,19 +44,24 @@
                   </div>
                   @if (Model.ColourType == ColourType.BW)
                   {
+                     <!-- BWPaperRate -->
+                     <div class="row">
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.BWPaperRate) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.BWPaperRate)</div>
+                     </div>
                      <!-- BWSerialNo-->
                      <div class="row">
                         <div class="col-6 text-end">@Html.DisplayNameFor(model => model.BWSerialNo) : </div>
                         <div class="col-6 text-start">@Html.DisplayFor(model => model.BWSerialNo)</div>
                      </div>
-                     <!-- PerPaperRate -->
-                     <div class="row">
-                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.BWPaperRate) : </div>
-                        <div class="col-6 text-start">@Html.DisplayFor(model => model.BWPaperRate)</div>
-                     </div>
                   }
                   @if (Model.ColourType == ColourType.Colour)
                   {
+                     <!-- PerPaperRate -->
+                     <div class="row">
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.ColourPaperRate) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.ColourPaperRate)</div>
+                     </div>
                      <!-- CyanSerialNo-->
                      <div class="row">
                         <div class="col-6 text-end">@Html.DisplayNameFor(model => model.CyanSerialNo) : </div>
@@ -76,11 +81,6 @@
                      <div class="row">
                         <div class="col-6 text-end">@Html.DisplayNameFor(model => model.BlackSerialNo) : </div>
                         <div class="col-6 text-start">@Html.DisplayFor(model => model.BlackSerialNo)</div>
-                     </div>
-                     <!-- PerPaperRate -->
-                     <div class="row">
-                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.ColourPaperRate) : </div>
-                        <div class="col-6 text-start">@Html.DisplayFor(model => model.ColourPaperRate)</div>
                      </div>
                   }
                   
