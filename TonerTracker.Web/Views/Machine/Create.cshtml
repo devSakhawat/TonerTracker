@@ -19,14 +19,16 @@
                </div>
             }
             <form method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Machine">
+
                <!-- Branch Name -->
                <div class="row mb-3">
                   <label for="branchId" class="col-4 col-form-label" asp-for="BranchID"></label>
                   <div class="col-8">
                      <input value="@ViewBag.BranchName" readonly class="form-control theme-black" />
-                     <input asp-for="BranchID" hidden value="@ViewBag.BranchId" />
+                     <input asp-for="BranchID" hidden/>
                   </div>
                </div>
+
                <!-- Machine Model -->
                <div class="row mb-3">
                   <label for="machineModel" class="col-4 col-form-label" asp-for="MachineModelNo"></label>
@@ -128,78 +130,86 @@
       </div>
    </div>
 </div>
+@*<script type="text/javascript" src="./js/site.js"></script>*@
 
 <script type="text/javascript">
   window.setTimeout(function () {
       $('#alert').remove('fast');
   }, 2000);
 
-   var baseApi = "https://localhost:7252/toner-tracker/";
 
-   function ColourTypeToner(){
-       var colourType = $("#colourType option:selected").val();
-       if (colourType == "1")
-       {
-          $("#MachineColourType").nextAll(".bwPaperRate .colourPaperRate .bwToner, .cyanToner, .magentaToner, .yellowToner, .blackToner").remove();
-          $("#MachineColourType").after(`<div class="row mb-3 bwPaperRate">
-                                            <label for="bwPaperRate" class="col-4 col-form-label" asp-for="BWPaperRate"></label>
-                                            <div class="col-8">
-                                              <input type="text" class="form-control theme-black" id="bwPaperRate" asp-for="BWPaperRate" placeholder="Enter Black & White Paper Rate.." />
-                                              <span asp-validation-for="BWPaperRate" class="text-danger"></span>
-                                            </div>
-                                          </div>
-                                          <div class="row mb-3 bwToner">
-                                             <label for="bwSerialNo" class="col-4 col-form-label" asp-for="BWSerialNo">BW Serial No</label>
-                                             <div class="col-8">
-                                                <input type="text" class="form-control theme-black" id="bwSerialNo" placeholder="Enter bw serial no.." data-val="true" data-val-required="BWSerialNo value required" name="BWSerialNo" value="">
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="BWSerialNo" data-valmsg-replace="true"></span>
-                                             </div>
-                                          </div>`);
+   //function ColourTypeToner(){
+   //    var colourType = $("#colourType option:selected").val();
+   //    if (colourType == "1")
+   //    {
+   //       $("#MachineColourType").nextAll(".bwPaperRate, .colourPaperRate, .bwToner, .cyanToner, .magentaToner, .yellowToner, .blackToner").remove();
+   //       $("#MachineColourType").after(`<!-- BWPaperPerRate -->
+   //                                       <div class="row mb-3 bwPaperRate">
+   //                                          <label for="bwPaperRate" class="col-4 col-form-label">BW Paper Rate</label>
+   //                                          <div class="col-8">
+   //                                             <input type="text" class="form-control theme-black" id="bwPaperRate" placeholder="Enter Black &amp; White Paper Rate.." data-val="true" data-val-number="The field BW Paper Rate must be a number." name="BWPaperRate" value="" pwa2-uuid="EDITOR/input-DB5-C77-FCBBB-D2B" pwa-fake-editor="">
+   //                                             <span class="text-danger field-validation-valid" data-valmsg-for="BWPaperRate" data-valmsg-replace="true"></span>
+   //                                          </div>
+   //                                       </div>
+
+   //                                       <!-- BW Toner Serial No -->
+   //                                       <div class="row mb-3 bwToner">
+   //                                          <label for="bwSerialNo" class="col-4 col-form-label">BW SerialNo</label>
+   //                                          <div class="col-8">
+   //                                             <input type="text" class="form-control theme-black" id="bwSerialNo" placeholder="Enter bw serial no.." name="BWSerialNo" value="" pwa2-uuid="EDITOR/input-A8B-CCA-A41F6-C80" pwa-fake-editor="">
+   //                                             <span class="text-danger field-validation-valid" data-valmsg-for="BWSerialNo" data-valmsg-replace="true"></span>
+   //                                          </div>
+   //                                       </div>`);
           
-       }
-       else if (colourType == "2") {
-           $("#MachineColourType").nextAll(".bwPaperRate .colourPaperRate .bwToner, .cyanToner, .magentaToner, .yellowToner, .blackToner").remove();
-           $("#MachineColourType").after(`<!-- ColourPaperPerRate -->
-                                        <div class="row mb-3 colourPaperRate">
-                                          <label for="colourPaperRate" class="col-4 col-form-label" asp-for="ColourPaperRate"></label>
-                                          <div class="col-8">
-                                            <input type="text" class="form-control theme-black" id="colourPaperRate" asp-for="ColourPaperRate" placeholder="Enter Colur Paper Rate.." />
-                                            <span asp-validation-for="ColourPaperRate" class="text-danger"></span>
-                                          </div>
-                                        </div>
-                                         <div class="row mb-3 cyanToner">
-                                             <label for="cyanSerialNo" class="col-4 col-form-label" asp-for="CyanSerialNo">Cyan Serial No</label>
-                                             <div class="col-8">
-                                                <input type="text" class="form-control theme-black" id="cyanSerialNo" placeholder="Enter cyan serial no.." data-val="true" data-val-required="SerialNo value required" name="CyanSerialNo" value="">
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="CyanSerialNo" data-valmsg-replace="true"></span>
-                                             </div>
-                                          </div>
+   //    }
+   //    else if (colourType == "2") {
+   //        $("#MachineColourType").nextAll(".bwPaperRate, .colourPaperRate, .bwToner, .cyanToner, .magentaToner, .yellowToner, .blackToner").remove();
+   //        $("#MachineColourType").after(`<!-- ColourPaperPerRate -->
+   //                                     <div class="row mb-3 colourPaperRate">
+   //                                       <label for="colourPaperRate" class="col-4 col-form-label">Colour Paper Rate</label>
+   //                                       <div class="col-8">
+   //                                          <input type="text" class="form-control theme-black" id="colourPaperRate" placeholder="Enter Colur Paper Rate.." data-val="true" data-val-number="The field Colour Paper Rate must be a number." name="ColourPaperRate" value="" pwa2-uuid="EDITOR/input-6B9-7A1-A28BD-21B" pwa-fake-editor="">
+   //                                          <span class="text-danger field-validation-valid" data-valmsg-for="ColourPaperRate" data-valmsg-replace="true"></span>
+   //                                       </div>
+   //                                    </div>
 
-                                          <div class="row mb-3 magentaToner">
-                                             <label for="magentaSerialNo" class="col-4 col-form-label" asp-for="MagentaSerialNo">Magenta Serial No</label>
-                                             <div class="col-8">
-                                                <input type="text" class="form-control theme-black" id="magentaSerialNo" placeholder="Enter magenta serial no.." data-val="true" data-val-required="MagentaSerialNo value required" name="MagentaSerialNo" value="">
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="MagentaSerialNo" data-valmsg-replace="true"></span>
-                                             </div>
-                                          </div>
+   //                                    <!-- Cyan Toner Serial No -->
+   //                                    <div class="row mb-3 cyanToner">
+   //                                          <label for="cyanSerialNo" class="col-4 col-form-label">Cyan SerialNo</label>
+   //                                          <div class="col-8">
+   //                                             <input type="text" class="form-control theme-black" id="cyanSerialNo" placeholder="Enter cyan serial no.." name="CyanSerialNo" value="" pwa2-uuid="EDITOR/input-4FE-724-4EB41-CD5" pwa-fake-editor="">
+   //                                             <span class="text-danger field-validation-valid" data-valmsg-for="CyanSerialNo" data-valmsg-replace="true"></span>
+   //                                          </div>
+   //                                    </div>
 
-                                          <div class="row mb-3 yellowToner">
-                                             <label for="yellowSerialNo" class="col-4 col-form-label" asp-for="YellowSerialNo">Yellow Serial No</label>
-                                             <div class="col-8">
-                                                <input type="text" class="form-control theme-black" id="yellowSerialNo" placeholder="Enter yellow serial no.." data-val="true" data-val-required="YellowSerialNo value required" name="YellowSerialNo" value="">
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="YellowSerialNo" data-valmsg-replace="true"></span>
-                                             </div>
-                                          </div>
+   //                                    <!-- Magenta Toner Serial No -->
+   //                                    <div class="row mb-3 magentaToner">
+   //                                       <label for="magentaSerialNo" class="col-4 col-form-label">Magenta SerialNo</label>
+   //                                       <div class="col-8">
+   //                                          <input type="text" class="form-control theme-black" id="magentaSerialNo" placeholder="Enter magenta serial no.." name="MagentaSerialNo" value="" pwa2-uuid="EDITOR/input-A10-4BF-0A247-D4A" pwa-fake-editor="">
+   //                                          <span class="text-danger field-validation-valid" data-valmsg-for="MagentaSerialNo" data-valmsg-replace="true"></span>
+   //                                       </div>
+   //                                    </div>
 
-                                          <div class="row mb-3 blackToner">
-                                             <label for="blackSerialNo" class="col-4 col-form-label" asp-for="BlackSerialNo">Black Serial No</label>
-                                             <div class="col-8">
-                                                <input type="text" class="form-control theme-black" id="blackSerialNo" placeholder="Enter black serial no.." data-val="true" data-val-required="BlackSerialNo value required" name="BlackSerialNo" value="">
-                                                <span class="text-danger field-validation-valid" data-valmsg-for="BlackSerialNo" data-valmsg-replace="true"></span>
-                                             </div>
-                                          </div>`)
-       }
-   };
+   //                                    <!-- Yellow Toner Serial No -->
+   //                                    <div class="row mb-3 yellowToner">
+   //                                       <label for="yellowSerialNo" class="col-4 col-form-label">Yellow SerialNo</label>
+   //                                       <div class="col-8">
+   //                                          <input type="text" class="form-control theme-black" id="yellowSerialNo" placeholder="Enter yellow serial no.." name="YellowSerialNo" value="" pwa2-uuid="EDITOR/input-520-FE8-ADD56-E8F" pwa-fake-editor="">
+   //                                          <span class="text-danger field-validation-valid" data-valmsg-for="YellowSerialNo" data-valmsg-replace="true"></span>
+   //                                       </div>
+   //                                    </div>
+
+   //                                    <!-- Black Toner Serial No -->
+   //                                    <div class="row mb-3 blackToner">
+   //                                       <label for="blackSerialNo" class="col-4 col-form-label">Black SerialNo</label>
+   //                                       <div class="col-8">
+   //                                          <input type="text" class="form-control theme-black" id="blackSerialNo" placeholder="Enter black serial no.." name="BlackSerialNo" value="" pwa2-uuid="EDITOR/input-5ED-42E-A6716-D17" pwa-fake-editor="">
+   //                                          <span class="text-danger field-validation-valid" data-valmsg-for="BlackSerialNo" data-valmsg-replace="true"></span>
+   //                                       </div>
+   //                                    </div>`)
+   //    }
+   //};
 </script>
 
 
