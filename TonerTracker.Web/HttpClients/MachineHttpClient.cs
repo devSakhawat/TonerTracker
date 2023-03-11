@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using TonerTracker.Domain.Dto;
 using TonerTracker.Domain.Entity;
+using TonerTracker.Utilities.Constant;
 
 namespace TonerTracker.Web.HttpClients
 {
@@ -24,6 +25,15 @@ namespace TonerTracker.Web.HttpClients
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PostAsync($"{baseApi}machine", content);
+
+         if (response.ReasonPhrase == "Conflict")
+         {
+            MachineDto machineDto = new MachineDto
+            {
+               ErrorMessage = MessageConstants.DuplicateError
+            };
+            return machineDto;
+         }
 
          if (!response.IsSuccessStatusCode)
             return new MachineDto();

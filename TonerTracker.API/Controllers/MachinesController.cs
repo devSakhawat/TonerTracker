@@ -231,6 +231,7 @@ namespace TonerTracker.API.Controllers
 
         if (branches.Count() == 0 || branches == null)
           return StatusCode(StatusCodes.Status400BadRequest, MessageConstants.NoMatchFoundError);
+
         return Ok(branches);
       }
       catch (Exception ex)

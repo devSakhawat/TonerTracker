@@ -43,7 +43,13 @@ namespace TonerTracker.Web.Controllers
          {
             var machine = await new MachineHttpClient(client).CreateMachine(model);
 
-            if(machine.ID == 0 || machine == null)
+
+            if (machine.ErrorMessage != null)
+            {
+               TempData[SessionConstant.Message] = machine.ErrorMessage;
+               return View(model);
+            }
+            else if (machine.ID == 0 || machine == null)
             {
                TempData[SessionConstant.Message] = MessageConstants.UnauthorizedAttemptOfRecordInsert;
                return View(model);
@@ -51,7 +57,7 @@ namespace TonerTracker.Web.Controllers
             else
             {
                TempData[SessionConstant.Message] = MessageConstants.RecordSaved;
-               return RedirectToAction(nameof(Index), new {branchId = machine.BranchID});
+               return RedirectToAction(nameof(Index), new {branchId = model.BranchID});
             }
          }
          else
@@ -72,12 +78,16 @@ namespace TonerTracker.Web.Controllers
             return View();
          }
 
+         var branch = await new BranchHttpClient(client).ReadBranchByKey(branchId);
+         ViewBag.CompanyId = branch.CompanyID;
+         ViewBag.BranchId = branchId;
+
          List<Machine> machines = await new MachineHttpClient(client).MachinesByBranchId(branchId);
 
          if (machines.Count == 0 || machines == null)
          {
             TempData[SessionConstant.Message] = MessageConstants.NoMatchFoundError;
-            return View();
+            return View(machines);
          }
          return View(machines);
       }
@@ -87,17 +97,15 @@ namespace TonerTracker.Web.Controllers
       [HttpGet]
       public async Task<IActionResult> Update(int id)
       {
-         //var branch = await new BranchHttpClient(client).ReadBranchByKey(branchId);
-         //ViewBag.BranchName = branch.BrachName;
-         //ViewBag.BranchId = branchId;
-
-         if (id == 0)
+         if (id <= 0)
          {
             TempData[SessionConstant.Message] = MessageConstants.InvalidParameterError;
             return View();
          }
 
          var machine = await new MachineHttpClient(client).ReadMachineByKey(id);
+         ViewBag.BranchName = machine.Branch.BranchName;
+         ViewBag.BranchId = machine.BranchID;
 
          ViewData["BranchId"] = new SelectList(await new BranchHttpClient(client).ReadBranches(), "ID", "BranchName", machine.BranchID);
          //ViewBag.BranchId = branchId;
@@ -139,7 +147,7 @@ namespace TonerTracker.Web.Controllers
       #region Detail
       public async Task<IActionResult> Detail(int id)
       {
-         if(id == 0)
+         if(id <= 0)
          {
             TempData[SessionConstant.Message] = MessageConstants.InvalidParameterError;
             return View();
@@ -160,7 +168,7 @@ namespace TonerTracker.Web.Controllers
       [HttpGet]
       public async Task<IActionResult> Delete(int id)
       {
-         if (id == 0)
+         if (id <= 0)
          {
             TempData[SessionConstant.Message] = MessageConstants.InvalidParameterError;
             return View();
@@ -179,21 +187,13 @@ namespace TonerTracker.Web.Controllers
       [HttpPost]
       public async Task<IActionResult> Delete(MachineDto model)
       {
-         if (model.ID == 0 || model == null)
+         if (model.ID <= 0 || model == null)
          {
             TempData[SessionConstant.Message] = MessageConstants.UnauthorizedAttemptOfRecordDeleteError;
             return View();
          }
 
          var machine = await new MachineHttpClient(client).ReadMachineByKey(model.ID);
-
-         machine.Branch = null;
-
-         if (machine.ID != model.ID || machine == null)
-         {
-            TempData[SessionConstant.Message] = MessageConstants.NoMatchFoundError;
-            return View();
-         }
 
          var machineInDb = await new MachineHttpClient(client).DeleteMachine(machine);
 

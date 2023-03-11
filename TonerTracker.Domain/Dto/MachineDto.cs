@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TonerTracker.Domain.Entity;
 using TonerTracker.Utilities.Constant;
@@ -51,6 +52,10 @@ namespace TonerTracker.Domain.Dto
       [Display(Name = "Colour Paper Rate")]
       public decimal? ColourPaperRate{get; set;}
 
-      public virtual Branch? Branch { get; set; }
+      [ValidateNever]
+      public virtual Branch Branch { get; set; }
+
+      //PassErrorMessage
+      public string? ErrorMessage { get; set; }
    }
 }
