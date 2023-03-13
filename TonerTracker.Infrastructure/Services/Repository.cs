@@ -28,9 +28,7 @@ namespace TonerTracker.Infrastructure.Services
       {
          return await context.Set<T>().AsQueryable().AsNoTracking().Where(predicate).ToListAsync();
       }
-      #endregion QueryAsync
 
-      #region QueryAsync
       public async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj)
       {
          return await context.Set<T>()
@@ -40,6 +38,16 @@ namespace TonerTracker.Infrastructure.Services
             .Include(obj)
             .ToListAsync();
       }
+
+      //public async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj)
+      //{
+      //   return await context.Set<T>()
+      //      .AsQueryable()
+      //      .AsNoTracking()
+      //      .Where(predicate)
+      //      .Include(obj)
+      //      .ToListAsync();
+      //}
       #endregion QueryAsync
 
       #region FirstOrDefaultAsync

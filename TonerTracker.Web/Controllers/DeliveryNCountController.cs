@@ -52,7 +52,13 @@ namespace TonerTracker.Web.Controllers
 
             DeliveryNCountDto deliveryNCountDto = new DeliveryNCountDto();
 
-            List<TonerDelivery> tonerDeliveries = await new DeliveryNCountHttpclientt(client).TonerDevliveriesByMachineId(machineId);
+            // Machine with company for sidebar menu
+            List<Machine> machines = await new MachineHttpClient(client).ReadMachines();
+            if (machines.Count() == 0 || machines == null)
+               deliveryNCountDto.MachineErrorMessage = MessageConstants.NoMatchFoundError;
+            deliveryNCountDto.Machines = machines;
+
+            List <TonerDelivery> tonerDeliveries = await new DeliveryNCountHttpclientt(client).TonerDevliveriesByMachineId(machineId);
             if (tonerDeliveries == null || tonerDeliveries.Count() == 0)
                deliveryNCountDto.TonerErrorMessage = MessageConstants.NoMatchFoundError;
             deliveryNCountDto.TonerDeliveries = tonerDeliveries;

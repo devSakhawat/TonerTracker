@@ -4,141 +4,364 @@
 @model DeliveryNCountDto
 
 @{
+   Layout = "";
    ViewBag.Title = "Toner Delivery and Paper Count";
 }
 
-<!-- Branch content -->
-<div class="container-fluid pt-4 px-4">
-   <div class="theme-bg-secondary theme-font-color text-center rounded p-4">
-
-      <!-- Title -->
-      <div class="d-flex align-items-center justify-content-between mb-4">
-         <h1 class="mb-0 display-6">@ViewBag.Title</h1>
-         <a class="theme-anchor" asp-controller="DeliveryNCount" asp-action="Create" asp-route-machineId="@Model.TonerDeliveries.ToList().First().MachineID">Add New Machine</a>
-      </div>
-
-      <!--ALERT-->
-      @if (Convert.ToString(TempData[SessionConstant.Message]).Length > 1)
-      {
-         <div class="alert alert-success alert-dismissible text-center fade show" id="alert" role="alert">
-            <i class="bi bi-check-circle-fill"></i>&nbsp; @TempData[SessionConstant.Message]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-         </div>
-      }
-      <div class="table-responsive">
-         @if (Model.TonerErrorMessage != null)
-         {
-            <h2 class="text-center display-6 text-danger">@Model.TonerErrorMessage</h2>
-         }
-         else
-         {
-            <h2 class="text-center display-6">Toner Deliveries</h2>
-         }
-
-         @if (Model.TonerDeliveries.ToList().First().Machine.ColourType == ColourType.BW)
-         {
-            <table class="table text-start align-middle table-bordered table-hover mb-2">
-               <thead>
-                  <tr class="text-white theme-font-color">
-                     <th scope="col">Machine</th>
-                     <th scope="col">DeliveryBW</th>
-                     <th scope="col">StockBW</th>
-                     <th scope="col">Action</th>
-                  </tr>
-               </thead>
-               <tbody class="theme-font-color">
-                  @foreach (var item in Model.TonerDeliveries)
-                  {
-                     <tr>
-                        <td>@item.Machine.MachineModelNo</td>
-                        <td>@item.DeliveryBW</td>
-                        <td>
-                           <a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockBW</a>
-                        </td>
-                        <td>
-                           <a asp-action="Update" asp-route-id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
-                              <i class="fas fa-pen"></i>
-                              Update
-                           </a>
-                           <a asp-action="Detail" asp-route-id="@item.ID" class="btn btn-sm btn-success mt-1 mb-1">
-                              <i class="fas fa-info-circle"></i>
-                              Detail
-                           </a>
-                           <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger mt-1 mb-1">
-                              <i class="fas fa-trash"></i>
-                              Delete
-                           </a>
-                           @*<a asp-controller="TonerDelivery" asp-action="Create" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
-                     <i class="fas fa-list-ul"></i>
-                     Toner Delivery
-                     </a>*@
-                        </td>
-                     </tr>
-                  }
-               </tbody>
-            </table>
-         }
-         else
-         {
-            <table class="table text-start align-middle table-bordered table-hover mb-2">
-               <thead>
-                  <tr class="text-white theme-font-color">
-                     <th scope="col">Machine</th>
-                     <th scope="col">Delivery Cyan</th>
-                     <th scope="col">Delivery Magenta</th>
-                     <th scope="col">Delivery Yellow</th>
-                     <th scope="col">Delivery Black</th>
-                     <th scope="col">Stock Cyan</th>
-                     <th scope="col">Stock Magenta</th>
-                     <th scope="col">Stock Yellow</th>
-                     <th scope="col">Stock Black</th>
-                     <th scope="col">Action</th>
-                  </tr>
-               </thead>
-               <tbody class="theme-font-color">
-                  @foreach (var item in Model.TonerDeliveries)
-                  {
-                     <tr>
-                        <td>@item.Machine.MachineSerialNo</td>
-                        <td>@item.DeliveryCyan</td>
-                        <td>@item.DeliveryMagenta</td>
-                        <td>@item.DeliveryYellow</td>
-                        <td>@item.DeliveryBlack</td>
-                        <td><a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockCyan</a></td>
-                        <td><a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockMagenta</a></td>
-                        <td><a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockYellow</a></td>
-                        <td><a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockBlack</a></td>
-                        <td>
-                           <a asp-action="Update" asp-route-Id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
-                              <i class="fas fa-pen"></i>
-                              @* Update*@
-                           </a>
-                           <a asp-action="Detail" asp-route-Id="@item.ID" class="btn btn-sm btn-success mt-1 mb-1">
-                              <i class="fas fa-info-circle"></i>
-                              @*Detail*@
-                           </a>
-                           <a asp-action="Delete" asp-route-Id="@item.ID" class="btn btn-sm btn-danger mt-1 mb-1">
-                              <i class="fas fa-trash"></i>
-                              @*Delete*@
-                           </a>
-                        </td>
-                     </tr>
-                  }
-               </tbody>
-            </table>
-         }
-
-         <div class="text-start">
-            <a asp-controller="Machine" asp-action="Index" asp-route-branchId="@Model.TonerDeliveries.ToList().First().Machine.BranchID" class="btn btn-secondary mt-3 mb-1 text-start ">
-               <i class="fas fa-long-arrow-alt-left"></i> &nbsp;Back To Branch List
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>@ViewData["Title"] - TonerTracker.Web</title>
+   <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+   <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+   <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+   <link rel="stylesheet" href="~/css/dark-pan.css" />
+   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+   <link rel="stylesheet" href="~/TonerTracker.Web.styles.css" asp-append-version="true" />
+</head>
+<body>
+   <div class="container-fluid position-relative d-flex p-0">
+      <!-- Sidebar Start -->
+      <div class="sidebar pe-4 pb-3">
+         <nav class="navbar theme-bg-secondary theme-font-color navbar-dark">
+            <a href="index.html" class="navbar-brand mx-4 mb-3">
+               <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
             </a>
-         </div>
+            <div class="d-flex align-items-center ms-4 mb-4">
+               <div class="position-relative">
+                  <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                  <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+               </div>
+               <div class="ms-3">
+                  <h6 class="mb-0">Jhon Doe</h6>
+                  <span>Admin</span>
+               </div>
+            </div>
+
+            <div class="navbar-nav w-100">
+               <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Home</a>
+               @foreach (var machine in Model.Machines)
+               {
+                  List<Branch> branches = new List<Branch>();
+                  branches.Add(machine.Branch);
+                  <div class="nav-item dropdown">
+                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>@machine.Branch.Company.CompanyName</a>
+                     @foreach (var branch in branches)
+                     {
+                        <div class="nav-item dropdown">
+                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>@branch.BranchName</a>
+                        </div>
+                     }
+                     
+                     
+                     @*<div class="dropdown-menu bg-transparent border-0">
+                     
+                           List<Branch> branches = new List<Branch>();
+                           branches.Add(machine.Branch);
+                           List<Machine> machines = new List<Machine>();
+                           machines.Add(Model.Machines);
+
+                           <div class="nav-item dropdown">
+                              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                 <i class="fa fa-laptop me-2"></i>
+                                 @machine.Branch.Company.CompanyName
+                              </a>
+                              <div class="dropdown-menu bg-transparent border-0">
+                                 <a asp-controller="Branch" asp-action="Index" class="dropdown-item">Branches</a>
+                                 <a asp-controller="Branch" asp-action="Create" class="dropdown-item">New Branch</a>
+                              </div>
+                               <div class="dropdown-menu bg-transparent border-0">
+                                 @foreach (var branch in branches)
+                                 {
+                                    <a asp-controller="Branch" asp-action="Index" class="dropdown-item">@branch.BranchName</a>
+                                 }
+                              </div>
+                           </div>
+                          
+                     
+                     </div>*@
+                  </div>
+                }
+               @*<div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Branch</a>
+                  <div class="dropdown-menu bg-transparent border-0">
+                     <a asp-controller="Branch" asp-action="Index" class="dropdown-item">Branches</a>
+                     <a asp-controller="Branch" asp-action="Create" class="dropdown-item">New Branch</a>
+                  </div>
+               </div>
+
+               <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Machine</a>
+                  <div class="dropdown-menu bg-transparent border-0">
+                     <a asp-controller="Machine" asp-action="Index" class="dropdown-item">Machines</a>
+                     <a asp-controller="Machine" asp-action="Create" class="dropdown-item">New Machine</a>
+                  </div>
+               </div>
+
+               <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Delivery N Count</a>
+                  <div class="dropdown-menu bg-transparent border-0">
+                     <a asp-controller="DeliveryNCount" asp-action="Index" class="dropdown-item ms-1">Delivery N Count</a>
+                     <a asp-controller="DeliveryNCount" asp-action="Create" class="dropdown-item ms-1">New Delivery N Count</a>
+                  </div>
+               </div>*@
+
+            </div>
+         </nav>
       </div>
+      <!-- Sidebar End -->
+
+      <!-- Content Start -->
+      <div class="content">
+         <!-- Navbar Start -->
+         <nav class="navbar navbar-expand theme-bg-secondary theme-font-color navbar-dark sticky-top px-4 py-0">
+            <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+               <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+            </a>
+            <a href="#" class="sidebar-toggler flex-shrink-0">
+               <i class="fa fa-bars"></i>
+            </a>
+            <form class="d-none d-md-flex ms-4">
+               <input class="form-control bg-dark border-0" type="search" placeholder="Search">
+            </form>
+            <div class="navbar-nav align-items-center ms-auto">
+               <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                     <i class="fa fa-envelope me-lg-2"></i>
+                     <span class="d-none d-lg-inline-flex">Message</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                     <a href="#" class="dropdown-item">
+                        <div class="d-flex align-items-center">
+                           <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                           <div class="ms-2">
+                              <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                              <small>15 minutes ago</small>
+                           </div>
+                        </div>
+                     </a>
+                     <hr class="dropdown-divider">
+                     <a href="#" class="dropdown-item">
+                        <div class="d-flex align-items-center">
+                           <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                           <div class="ms-2">
+                              <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                              <small>15 minutes ago</small>
+                           </div>
+                        </div>
+                     </a>
+                     <hr class="dropdown-divider">
+                     <a href="#" class="dropdown-item">
+                        <div class="d-flex align-items-center">
+                           <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                           <div class="ms-2">
+                              <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                              <small>15 minutes ago</small>
+                           </div>
+                        </div>
+                     </a>
+                     <hr class="dropdown-divider">
+                     <a href="#" class="dropdown-item text-center">See all message</a>
+                  </div>
+               </div>
+               <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                     <i class="fa fa-bell me-lg-2"></i>
+                     <span class="d-none d-lg-inline-flex">Notificatin</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                     <a href="#" class="dropdown-item">
+                        <h6 class="fw-normal mb-0">Profile updated</h6>
+                        <small>15 minutes ago</small>
+                     </a>
+                     <hr class="dropdown-divider">
+                     <a href="#" class="dropdown-item">
+                        <h6 class="fw-normal mb-0">New user added</h6>
+                        <small>15 minutes ago</small>
+                     </a>
+                     <hr class="dropdown-divider">
+                     <a href="#" class="dropdown-item">
+                        <h6 class="fw-normal mb-0">Password changed</h6>
+                        <small>15 minutes ago</small>
+                     </a>
+                     <hr class="dropdown-divider">
+                     <a href="#" class="dropdown-item text-center">See all notifications</a>
+                  </div>
+               </div>
+               <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                     <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                     <span class="d-none d-lg-inline-flex">John Doe</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                     <a href="#" class="dropdown-item">My Profile</a>
+                     <a href="#" class="dropdown-item">Settings</a>
+                     <a href="#" class="dropdown-item">Log Out</a>
+                  </div>
+               </div>
+            </div>
+         </nav>
+         <!-- Navbar End -->
+
+         <!-- Toner Delivery content -->
+         <div class="container-fluid pt-4 px-4">
+            <div class="theme-bg-secondary theme-font-color text-center rounded p-4">
+
+               <!-- Title -->
+               <div class="d-flex align-items-center justify-content-between mb-4">
+                  <h1 class="mb-0 display-6">@ViewBag.Title</h1>
+                  <a class="theme-anchor" asp-controller="DeliveryNCount" asp-action="Create" asp-route-machineId="@Model.TonerDeliveries.ToList().First().MachineID">Add New Machine</a>
+               </div>
+
+               <!--ALERT-->
+               @if (Convert.ToString(TempData[SessionConstant.Message]).Length > 1)
+               {
+                  <div class="alert alert-success alert-dismissible text-center fade show" id="alert" role="alert">
+                     <i class="bi bi-check-circle-fill"></i>&nbsp; @TempData[SessionConstant.Message]
+                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+               }
+               <div class="table-responsive">
+                  @if (Model.TonerErrorMessage != null)
+                  {
+                     <h2 class="text-center display-6 text-danger">@Model.TonerErrorMessage</h2>
+                  }
+                  else
+                  {
+                     <h2 class="text-center display-6">Toner Deliveries</h2>
+                  }
+
+                  @if (Model.TonerDeliveries.ToList().First().Machine.ColourType == ColourType.BW)
+                  {
+                     <table class="table text-start align-middle table-bordered table-hover mb-2">
+                        <thead>
+                           <tr class="text-white theme-font-color">
+                              <th scope="col">Machine</th>
+                              <th scope="col">DeliveryBW</th>
+                              <th scope="col">StockBW</th>
+                              <th scope="col">Action</th>
+                           </tr>
+                        </thead>
+                        <tbody class="theme-font-color">
+                           @foreach (var item in Model.TonerDeliveries)
+                           {
+                              <tr>
+                                 <td>@item.Machine.MachineModelNo</td>
+                                 <td>@item.DeliveryBW</td>
+                                 <td>
+                                    <a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockBW</a>
+                                 </td>
+                                 <td>
+                                    <a asp-action="Update" asp-route-id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
+                                       <i class="fas fa-pen"></i>
+                                       Update
+                                    </a>
+                                    <a asp-action="Detail" asp-route-id="@item.ID" class="btn btn-sm btn-success mt-1 mb-1">
+                                       <i class="fas fa-info-circle"></i>
+                                       Detail
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger mt-1 mb-1">
+                                       <i class="fas fa-trash"></i>
+                                       Delete
+                                    </a>
+                                    @*<a asp-controller="TonerDelivery" asp-action="Create" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
+                              <i class="fas fa-list-ul"></i>
+                              Toner Delivery
+                              </a>*@
+                                 </td>
+                              </tr>
+                           }
+                        </tbody>
+                     </table>
+                  }
+                  else
+                  {
+                     <table class="table text-start align-middle table-bordered table-hover mb-2">
+                        <thead>
+                           <tr class="text-white theme-font-color">
+                              <th scope="col">Machine</th>
+                              <th scope="col">Delivery Cyan</th>
+                              <th scope="col">Delivery Magenta</th>
+                              <th scope="col">Delivery Yellow</th>
+                              <th scope="col">Delivery Black</th>
+                              <th scope="col">Stock Cyan</th>
+                              <th scope="col">Stock Magenta</th>
+                              <th scope="col">Stock Yellow</th>
+                              <th scope="col">Stock Black</th>
+                              <th scope="col">Action</th>
+                           </tr>
+                        </thead>
+                        <tbody class="theme-font-color">
+                           @foreach (var item in Model.TonerDeliveries)
+                           {
+                              <tr>
+                                 <td>@item.Machine.MachineSerialNo</td>
+                                 <td>@item.DeliveryCyan</td>
+                                 <td>@item.DeliveryMagenta</td>
+                                 <td>@item.DeliveryYellow</td>
+                                 <td>@item.DeliveryBlack</td>
+                                 <td><a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockCyan</a></td>
+                                 <td><a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockMagenta</a></td>
+                                 <td><a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockYellow</a></td>
+                                 <td><a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockBlack</a></td>
+                                 <td>
+                                    <a asp-action="Update" asp-route-Id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
+                                       <i class="fas fa-pen"></i>
+                                       @* Update*@
+                                    </a>
+                                    <a asp-action="Detail" asp-route-Id="@item.ID" class="btn btn-sm btn-success mt-1 mb-1">
+                                       <i class="fas fa-info-circle"></i>
+                                       @*Detail*@
+                                    </a>
+                                    <a asp-action="Delete" asp-route-Id="@item.ID" class="btn btn-sm btn-danger mt-1 mb-1">
+                                       <i class="fas fa-trash"></i>
+                                       @*Delete*@
+                                    </a>
+                                 </td>
+                              </tr>
+                           }
+                        </tbody>
+                     </table>
+                  }
+
+                  <div class="text-start">
+                     <a asp-controller="Machine" asp-action="Index" asp-route-branchId="@Model.TonerDeliveries.ToList().First().Machine.BranchID" class="btn btn-secondary mt-3 mb-1 text-start ">
+                        <i class="fas fa-long-arrow-alt-left"></i> &nbsp;Back To Branch List
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Toner content -->
+
+         <!-- Footer Start -->
+         <div class="container-fluid pt-4 px-4">
+            <div class="theme-bg-secondary theme-font-color rounded-top p-4">
+               <div class="row">
+                  <div class="col-12 col-sm-6 text-center text-sm-start">
+                     &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                  </div>
+                  <div class="col-12 col-sm-6 text-center text-sm-end">
+                     <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                     Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                     <br>Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Footer End -->
+      </div>
+      <!-- Content End -->
+
+      <!-- Back to Top -->
+      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
    </div>
-</div>
-<!-- Delivery content -->
-@*<script type="text/javascript">
-   window.setTimeout(function () {
-      $('#alert').remove('fast');
-   }, 2000);
-</script>*@
+   <script src="~/lib/jquery/dist/jquery.min.js"></script>
+   <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="~/js/dark-pan.js"></script>
+   <script src="~/js/site.js" asp-append-version="true"></script>
+  @* @await RenderSectionAsync("Scripts", required: false)*@
+</body>
+</html>

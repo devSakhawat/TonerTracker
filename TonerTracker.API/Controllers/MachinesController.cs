@@ -75,7 +75,7 @@ namespace TonerTracker.API.Controllers
     {
       try
       {
-        var machines = await context.MachineRepository.QueryAsync(m => m.IsDeleted == false);
+        var machines = await context.MachineRepository.MachineWithCompany();
 
         if (machines.Count() < 0 || machines == null)
           return StatusCode(StatusCodes.Status404NotFound, MessageConstants.NoRecordError);

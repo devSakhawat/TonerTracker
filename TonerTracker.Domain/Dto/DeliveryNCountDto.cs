@@ -13,8 +13,18 @@ namespace TonerTracker.Domain.Dto
       public TonerDelivery? TonerDelivery { get; set; }
       public PaperCount? PaperCount { get; set; }
 
+      public List<Machine> Machines { get; set; }
+
+      //public Machine Machine { get; set; }
+
+      //public Branch Branch { get; set; }
+
+      //public Company company { get; set; }
+
+
       public string? TonerErrorMessage { get; set; }
       public string? PaperErrorMessage { get; set; }
+      public string? MachineErrorMessage { get; set; }
       public string? ExceptionError { get; set; }
 
     //// Toner Delivery

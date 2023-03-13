@@ -47,7 +47,7 @@ namespace TonerTracker.Web.HttpClients
       #region ReadMachines
       public async Task<List<Machine>> ReadMachines()
       {
-         var response = await client.GetAsync($"{baseApi}machine");
+         var response = await client.GetAsync($"{baseApi}machines");
 
          if (!response.IsSuccessStatusCode)
             return new List<Machine>();
