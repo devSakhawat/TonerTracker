@@ -62,7 +62,8 @@
                               <i class="fas fa-trash"></i>
                               @*Delete*@
                            </a>
-                           <a asp-controller="DeliveryNCount" asp-action="Index" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
+                           @*<a asp-controller="DeliveryNCount" asp-action="Index" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">*@
+                           <a asp-controller="DeliveryNCount" asp-action="DeliveryNCountSideMenu" class="btn btn-sm btn-info mt-1 mb-1">
                               <i class="fas fa-list-ul"></i>
                               Toner N Paper
                            </a>

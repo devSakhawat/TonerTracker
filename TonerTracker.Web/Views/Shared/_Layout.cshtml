@@ -41,7 +41,17 @@
          </div>
 
          <div class="navbar-nav w-100">
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Home</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Home</a>
+
+            <div class="nav-item dropdown">
+               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Delivery N Count</a>
+               <div class="dropdown-menu bg-transparent border-0">
+                  <a asp-controller="DeliveryNCount" asp-action="Index" class="dropdown-item ms-1">Delivery N Count</a>
+                  <a asp-controller="DeliveryNCount" asp-action="Create" class="dropdown-item ms-1">New Delivery N Count</a>
+               </div>
+            </div>
+
+            @*<a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Home</a>*@
             
             <div class="nav-item dropdown">
                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Comany</a>
@@ -241,6 +251,15 @@
    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
    <script src="~/js/dark-pan.js"></script>
    <script src="~/js/site.js" asp-append-version="true"></script>
+   <script>
+      let dropdowns = document.querySelectorAll('.dropdown-toggle')
+      dropdowns.forEach((dd) => {
+         dd.addEventListener('click', function (e) {
+            var el = this.nextElementSibling
+            el.style.display = el.style.display === 'block' ? 'none' : 'block'
+         })
+      })
+   </script>
    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

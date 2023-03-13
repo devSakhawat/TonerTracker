@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using TonerTracker.Domain.Dto;
 using TonerTracker.Domain.Entity;
 using TonerTracker.Utilities.Constant;
@@ -58,7 +59,7 @@ namespace TonerTracker.Web.Controllers
                deliveryNCountDto.MachineErrorMessage = MessageConstants.NoMatchFoundError;
             deliveryNCountDto.Machines = machines;
 
-            List <TonerDelivery> tonerDeliveries = await new DeliveryNCountHttpclientt(client).TonerDevliveriesByMachineId(machineId);
+            List<TonerDelivery> tonerDeliveries = await new DeliveryNCountHttpclientt(client).TonerDevliveriesByMachineId(machineId);
             if (tonerDeliveries == null || tonerDeliveries.Count() == 0)
                deliveryNCountDto.TonerErrorMessage = MessageConstants.NoMatchFoundError;
             deliveryNCountDto.TonerDeliveries = tonerDeliveries;
@@ -79,5 +80,47 @@ namespace TonerTracker.Web.Controllers
       }
       #endregion
 
+      #region DeliveryNCountSideMenu
+      public async Task<IActionResult> DeliveryNCountSideMenu()
+      {
+         try
+         {
+            DliveryNCount deliveryNCount = new DliveryNCount();
+            List<SideMenuCompany> sideMenuCompanies = await new DeliveryNCountHttpclientt(client).DeliveryNCountSideMenu();
+
+            deliveryNCount.SideMenuCompanies = sideMenuCompanies;
+            var branches = sideMenuCompanies.Select(b => b.Branches).ToList();
+            var machines = sideMenuCompanies.Select(b => b.Branches.Select(m => m.Machines)).ToList();
+
+            if (deliveryNCount.SideMenuCompanies.Count() == 0 || sideMenuCompanies == null)
+            {
+               deliveryNCount.ErrorMessage = MessageConstants.NoRecordError;
+               return View(deliveryNCount);
+            }
+            else if (branches.Count() == 0 || branches == null)
+            {
+               deliveryNCount.ErrorMessage = "Branch record not found!";
+               return View(deliveryNCount);
+            }
+            else if (machines.Count() == 0 || machines == null)
+            {
+               deliveryNCount.ErrorMessage = "Machine record not found!";
+               return View(deliveryNCount);
+            }
+            else
+            {
+
+               return View(deliveryNCount);
+            }
+            
+         }
+         catch (Exception ex)
+         {
+            DliveryNCount deliveryNCount = new DliveryNCount();
+            deliveryNCount.ErrorMessage = ex.Message.ToString();
+            return View(deliveryNCount);
+         }
+      }
+      #endregion DeliveryNCountSideMenu
    }
 }

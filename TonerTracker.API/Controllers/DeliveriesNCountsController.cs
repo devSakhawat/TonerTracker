@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using TonerTracker.Domain.Dto;
+﻿using Microsoft.AspNetCore.Mvc;
 using TonerTracker.Infrastructure.Contracts;
 using TonerTracker.Utilities.Constant;
 
@@ -17,17 +14,34 @@ namespace TonerTracker.API.Controllers
       {
          this.context = context;
       }
-    #endregion constructor
+      #endregion constructor
 
-    #region ReadSidebars
+      #region DeliveryNCountSideMenu
+      [Route(RouteConstant.ReadDeliveriesNCounts)]
+      [HttpGet]
+      public async Task<IActionResult> DeliveryNCountSideMenu()
+      {
+         try
+         {
+            var sideMenus = await context.TonerDeliveryRepository.DeliveryNCountSideMenu();
 
-    #endregion ReadSidebars
+            if (sideMenus.Count() < 0 || sideMenus == null)
+               return StatusCode(StatusCodes.Status404NotFound, MessageConstants.NoRecordError);
 
-    //#region CreateDeliveryNCount
-    //public Task<IActionResult> CreateDeliveryNCount(SidebarDto model)
-    //{ 
+            return Ok(sideMenus);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode(StatusCodes.Status500InternalServerError, MessageConstants.ExceptionError = ex.Message.ToString());
+         }
+      }
+      #endregion DeliveryNCountSideMenu
 
-    //}
-    //#endregion CreateDeliveryNCount
+      #region CreateDeliveryNCount
+      //public Task<IActionResult> CreateDeliveryNCount(SidebarDto model)
+      //{
+
+      //}
+      #endregion CreateDeliveryNCount
    }
 }

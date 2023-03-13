@@ -20,6 +20,20 @@ namespace TonerTracker.Web.HttpClients
       }
       #endregion Constructor
 
+      #region DeliveryNCountSideMenu
+      public async Task<List<SideMenuCompany>> DeliveryNCountSideMenu()
+      {
+         var response = await client.GetAsync($"{baseApi}deliveries-counts");
+
+         if(!response.IsSuccessStatusCode)
+            return new List<SideMenuCompany>();
+         string result = await response.Content.ReadAsStringAsync();
+         var sidebarMenuCompany = JsonConvert.DeserializeObject<List<SideMenuCompany>>(result);
+         List<SideMenuCompany> sidebarMenuCompanies = new List<SideMenuCompany>(sidebarMenuCompany.ToList());
+         return sidebarMenuCompanies;
+      }
+      #endregion DeliveryNCountSideMenu
+
       #region CreateTonerDelivery
       public async Task<DeliveryNCountDto> CreateTonerDelivery(DeliveryNCountDto model)
       {
