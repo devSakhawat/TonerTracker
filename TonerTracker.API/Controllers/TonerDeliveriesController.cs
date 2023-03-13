@@ -78,12 +78,12 @@ namespace TonerTracker.API.Controllers
             if (id == 0)
                return StatusCode(StatusCodes.Status400BadRequest, MessageConstants.InvalidParameterError);
 
-            var readTonerDelivery = await context.TonerDeliveryRepository.FirstOrDefaultAsync(td => td.ID == id);
+            var tonerDelivery = await context.TonerDeliveryRepository.FirstOrDefaultAsync(td => td.ID == id, m => m.Machine );
 
-            if (readTonerDelivery == null || readTonerDelivery.ID == 0)
+            if (tonerDelivery == null || tonerDelivery.ID == 0)
                return StatusCode(StatusCodes.Status404NotFound, MessageConstants.NoMatchFoundError);
 
-            return Ok(readTonerDelivery);
+            return Ok(tonerDelivery);
          }
          catch (Exception ex)
          {
@@ -137,6 +137,31 @@ namespace TonerTracker.API.Controllers
          }
       }
       #endregion DeleteTonerDelivery
+
+      #region TonerDevliveriesByMachineId
+      [Route(RouteConstant.TonerDevliveriesByMachineId)]
+      [HttpGet]
+      public async Task<IActionResult> TonerDevliveriesByMachineId(int key)
+      {
+         try
+         {
+            if (key <= 0)
+               return StatusCode(StatusCodes.Status400BadRequest, MessageConstants.InvalidParameterError);
+
+            IEnumerable<TonerDelivery> tonerDeliveries = await context.TonerDeliveryRepository.QueryAsync(td => td.MachineID == key && td.IsDeleted == false, m => m.Machine);
+
+            if (tonerDeliveries == null || tonerDeliveries.Count() == 0)
+               return StatusCode(StatusCodes.Status404NotFound, MessageConstants.NoMatchFoundError);
+
+            return Ok(tonerDeliveries);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode(StatusCodes.Status500InternalServerError, MessageConstants.ExceptionError = ex.Message.ToString());
+         }
+
+      }
+      #endregion TonerDevliveriesByMachineId
 
       #region IfTonerDeliveryDuplicate
       private async Task<bool> IfTonerDeliveryDuplicate(TonerDelivery model)

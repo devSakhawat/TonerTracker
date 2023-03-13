@@ -44,6 +44,7 @@
       public const string ReadTonerDeliveryByKey = "toner-delivery/key/{key}";
       public const string UpdateTonerDelivery = "toner-delivery/{key}";
       public const string DeleteTonerDelivery = "toner-delivery/{key}";
+      public const string TonerDevliveriesByMachineId = "toner-delivery/machine/{key}";
       #endregion TonerDelivery
 
       #region PaperCount
@@ -52,6 +53,7 @@
       public const string ReadPaperCountByKey = "paper-count/key/{key}";
       public const string UpdatePaperCount = "paper-count/{key}";
       public const string DeletePaperCount = "paper-count/{key}";
+      public const string PaperCountByMachineId = "paper-count/machine/{key}";
       #endregion PaperCount
 
       #region BillGenerate

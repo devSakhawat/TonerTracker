@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TonerTracker.Utilities.Constant;
 
@@ -11,6 +12,7 @@ namespace TonerTracker.Domain.Entity
 
       [Required(ErrorMessage = "Machine" + ModelValidationConstant.ValidationConstant)]
       [Display(Name = "Branch")]
+      [ForeignKey("BranchID")]
       public int BranchID { get; set; }
 
       [Required(ErrorMessage = "ModelNo" + ModelValidationConstant.ValidationConstant)]
@@ -59,10 +61,12 @@ namespace TonerTracker.Domain.Entity
       [Display(Name = "Colour Paper Rate")]
       public decimal? ColourPaperRate { get; set; }
 
-      [ForeignKey("BranchID")]
+      [ValidateNever]
       public virtual Branch Branch { get; set; }
 
-      //public virtual IEnumerable<PaperCount> PaperCounts { get; set; }
-      //public virtual IEnumerable<TonerDelivery> TonerDeliveries { get; set; }
+      //[ValidateNever]
+      //public IEnumerable<PaperCount>? PaperCounts { get; set; }
+      //[ValidateNever]
+      //public IEnumerable<TonerDelivery>? TonerDeliveries { get; set; }
    }
 }

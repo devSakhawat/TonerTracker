@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TonerTracker.DAL;
 
@@ -11,9 +12,10 @@ using TonerTracker.DAL;
 namespace TonerTracker.DAL.Migrations
 {
     [DbContext(typeof(TonerTrackerContext))]
-    partial class TonerTrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20230312152351_TonerSerial Add to TonerDelivery Entity")]
+    partial class TonerSerialAddtoTonerDeliveryEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

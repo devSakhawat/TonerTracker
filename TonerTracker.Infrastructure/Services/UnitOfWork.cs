@@ -64,15 +64,15 @@ namespace TonerTracker.Infrastructure.Services
       #endregion Machine
 
       #region TonerDelivery
-      ITonerDeliveryRepository tonerDeliveryRepository;
+      ITonerDeliveryRepository tonerDelivery;
       public ITonerDeliveryRepository TonerDeliveryRepository
       {
          get
          {
-            if (tonerDeliveryRepository == null)
-               tonerDeliveryRepository = new TonerDeliveryRepository(context);
+            if (tonerDelivery == null)
+               tonerDelivery = new TonerDeliveryRepository(context);
 
-            return TonerDeliveryRepository;
+            return tonerDelivery;
          }
       }
       #endregion TonerDelivery

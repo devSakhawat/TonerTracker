@@ -107,7 +107,7 @@ namespace TonerTracker.Web.Controllers
          ViewBag.BranchName = machine.Branch.BranchName;
          ViewBag.BranchId = machine.BranchID;
 
-         ViewData["BranchId"] = new SelectList(await new BranchHttpClient(client).ReadBranches(), "ID", "BranchName", machine.BranchID);
+         //ViewData["BranchId"] = new SelectList(await new BranchHttpClient(client).ReadBranches(), "ID", "BranchName", machine.BranchID);
          //ViewBag.BranchId = branchId;
 
          if (machine.ID == 0 || machine == null)

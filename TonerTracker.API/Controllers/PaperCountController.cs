@@ -137,6 +137,29 @@ namespace TonerTracker.API.Controllers
       }
       #endregion DeletePaperCount
 
+      #region PaperCountByMachineId
+      [Route(RouteConstant.PaperCountByMachineId)]
+      [HttpGet]
+      public async Task<IActionResult> PaperCountByMachineId(int key)
+      {
+         try
+         {
+            if (key <= 0)
+               return StatusCode(StatusCodes.Status400BadRequest, MessageConstants.InvalidParameterError);
+            IEnumerable<PaperCount> paperCounts = await context.PaperCountRepository.QueryAsync(pc => pc.MachineID == key && pc.IsDeleted == false, p => p.Machine);
+
+            if (paperCounts == null || paperCounts.Count() == 0)
+               return StatusCode(StatusCodes.Status404NotFound, MessageConstants.NoMatchFoundError);
+            return Ok(paperCounts);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode(StatusCodes.Status500InternalServerError, MessageConstants.ExceptionError);
+         }
+         
+      }
+      #endregion PaperCountByMachineId
+
       #region IfPaperCountDuplicate
       private async Task<bool> IfPaperCountDuplicate(PaperCount model)
       {

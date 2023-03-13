@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata.Ecma335;
 using TonerTracker.Utilities.Constant;
@@ -10,9 +11,25 @@ namespace TonerTracker.Domain.Entity
       [Key]
       public int ID { get; set; }
 
-      [Required(ErrorMessage =  "Machine" + ModelValidationConstant.ValidationConstant)]
+      [Required(ErrorMessage = "Machine" + ModelValidationConstant.ValidationConstant)]
       [Display(Name = "Machine")]
+      [ForeignKey("MachineID")]
       public int MachineID { get; set; }
+
+      [Display(Name = "BW Serial No")]
+      public string? BWSerialNo { get; set; }
+
+      [Display(Name = "Cyan Serial No")]
+      public string? CyanSerialNo { get; set; }
+
+      [Display(Name = "Magenta Serial No")]
+      public string? MagentaSerialNo { get; set; }
+
+      [Display(Name = "Yellow Serial No")]
+      public string? YellowSerialNo { get; set; }
+
+      [Display(Name = "Black Serial No")]
+      public string? BlackSerialNo { get; set; }
 
       [Display(Name = "InHouse BW")]
       public int? InHouseBW { get; set; }
@@ -75,7 +92,7 @@ namespace TonerTracker.Domain.Entity
       public decimal? StockBlack { get; set; }
 
 
-      [ForeignKey("MachineID")]
+      [ValidateNever]
       public virtual Machine Machine { get; set; }
    }
 }

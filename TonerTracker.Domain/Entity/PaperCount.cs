@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TonerTracker.Utilities.Constant;
@@ -12,6 +13,7 @@ namespace TonerTracker.Domain.Entity
 
       [Required(ErrorMessage = "Machine" + ModelValidationConstant.ValidationConstant)]
       [Display(Name = "Machine")]
+      [ForeignKey("MachineID")]
       public int MachineID { get; set; }
 
       //[Required(ErrorMessage = "Previous count" + ModelValidationConstant.ValidationConstant)]
@@ -26,7 +28,7 @@ namespace TonerTracker.Domain.Entity
       [Display(Name = "Total Paper")]
       public int? TotalPaper { get; set; }
 
-      [ForeignKey("MachineID")]
+      [ValidateNever]
       public virtual Machine Machine { get; set; }
       //public virtual IEnumerable<BillGenerate> BillGenerates { get; set; }
    }

@@ -62,9 +62,9 @@
                               <i class="fas fa-trash"></i>
                               @*Delete*@
                            </a>
-                           <a asp-controller="TonerDelivery" asp-action="Create" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
+                           <a asp-controller="DeliveryNCount" asp-action="Index" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
                               <i class="fas fa-list-ul"></i>
-                              Toner Delivery
+                              Toner N Paper
                            </a>
                         </td>
                      </tr>
@@ -121,9 +121,9 @@
                               <i class="fas fa-trash"></i>
                               @*Delete*@
                            </a>
-                           <a asp-controller="TonerDelivery" asp-action="Create" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
+                           <a asp-controller="DeliveryNCount" asp-action="Index" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
                               <i class="fas fa-list-ul"></i>
-                              Toner Delivery
+                              Toner N Paper
                            </a>
                         </td>
                      </tr>
@@ -132,7 +132,7 @@
             </tbody>
          </table>        
          <div class="text-start">
-            <a asp-controller="Branch" asp-action="Index" asp-route-companyId="@ViewBag.CompanyId" class="btn btn-secondary mt-3 mb-1 text-start ">
+            <a asp-controller="Branch" asp-action="Index" asp-route-companyId="@Model.ToList().First().BranchID" class="btn btn-secondary mt-3 mb-1 text-start ">
                <i class="fas fa-long-arrow-alt-left"></i> &nbsp;Back To Branch List
             </a>
          </div>
