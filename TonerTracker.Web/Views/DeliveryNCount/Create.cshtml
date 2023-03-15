@@ -1,4 +1,4 @@
-﻿@using TonerTracker.Domain.Entity
+﻿@*@using TonerTracker.Domain.Entity
 @using TonerTracker.Domain.Dto
 @using TonerTracker.Utilities.Constant
 @model DeliveryNCountDto
@@ -34,8 +34,8 @@
                         <option>Select Machine</option>
                      </select>
                      <span asp-validation-for="TonerDelivery.MachineID" class="text-danger"></span>
-                  </div>*@
-               </div>
+                  </div>
+               </div>*@
 
                @*<!-- Branch Name -->
                <div class="row mb-3">
@@ -142,11 +142,11 @@
                <a asp-controller="DeliveryNCount" asp-action="Index" asp-route-machineId="@Model.TonerDeliveries.ToList().First().MachineID" class="btn btn-secondary mt-2 mb-2 text-start ">
                   <i class="fas fa-long-arrow-alt-left"></i> &nbsp;Back To Machine List
                </a>*@
-            </form>
+@*            </form>
          </div>
       </div>
    </div>
-</div>
+</div>*@
 
 
 
@@ -452,9 +452,3 @@
 </script>
 </body>
 </html>*@
-
-
-
-
-
-

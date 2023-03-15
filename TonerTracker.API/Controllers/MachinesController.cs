@@ -21,7 +21,7 @@ namespace TonerTracker.API.Controllers
     #region CreateMachine
     [Route(RouteConstant.CreateMachine)]
     [HttpPost]
-    public async Task<IActionResult> CreateMachine(MachineDto model)
+    public async Task<IActionResult> CreateMachine(Machine model)
     {
       try
       {
@@ -43,15 +43,15 @@ namespace TonerTracker.API.Controllers
 
         if (model.ColourType == ColourType.BW)
         {
-          machine.BWSerialNo = model.BWSerialNo;
+          machine.BWModelNo = model.BWModelNo;
           machine.BWPaperRate = model.BWPaperRate;
         }
         else if (model.ColourType == ColourType.Colour)
         {
-          machine.CyanSerialNo = model.CyanSerialNo;
-          machine.MagentaSerialNo = model.MagentaSerialNo;
-          machine.YellowSerialNo = model.YellowSerialNo;
-          machine.BlackSerialNo = model.BlackSerialNo;
+          machine.CyanModelNo = model.CyanModelNo;
+          machine.MagentaModelNo = model.MagentaModelNo;
+          machine.YellowModelNo = model.YellowModelNo;
+          machine.BlackModelNo = model.BlackModelNo;
           machine.ColourPaperRate = model.ColourPaperRate;
         }
 
@@ -116,7 +116,7 @@ namespace TonerTracker.API.Controllers
     #region UpdateMachine
     [Route(RouteConstant.UpdateMachine)]
     [HttpPut]
-    public async Task<IActionResult> UpdateMachine(int key, MachineDto model)
+    public async Task<IActionResult> UpdateMachine(int key, Machine model)
     {
       try
       {
@@ -135,15 +135,15 @@ namespace TonerTracker.API.Controllers
 
         if (model.ColourType == ColourType.BW)
         {
-          machine.BWSerialNo = model.BWSerialNo;
+          machine.BWModelNo = model.BWModelNo;
           machine.BWPaperRate = model.BWPaperRate;
         }
         else if (model.ColourType == ColourType.Colour)
         {
-          machine.CyanSerialNo = model.CyanSerialNo;
-          machine.MagentaSerialNo = model.MagentaSerialNo;
-          machine.YellowSerialNo = model.YellowSerialNo;
-          machine.BlackSerialNo = model.BlackSerialNo;
+          machine.BlackModelNo = model.BlackModelNo;
+          machine.CyanModelNo = model.CyanModelNo;
+          machine.YellowModelNo = model.YellowModelNo;
+          machine.BlackModelNo = model.BlackModelNo;
           machine.ColourPaperRate = model.ColourPaperRate;
         }
 
@@ -163,7 +163,7 @@ namespace TonerTracker.API.Controllers
     #region DeleteMachine
     [Route(RouteConstant.DeleteMachine)]
     [HttpPatch]
-    public async Task<IActionResult> DeleteMachine(MachineDto model)
+    public async Task<IActionResult> DeleteMachine(Machine model)
     {
       try
       {
@@ -182,15 +182,15 @@ namespace TonerTracker.API.Controllers
 
         if (model.ColourType == ColourType.BW)
         {
-          machine.BWSerialNo = model.BWSerialNo;
+          machine.BWModelNo = model.BWModelNo;
           machine.BWPaperRate = model.BWPaperRate;
         }
         else if (model.ColourType == ColourType.Colour)
         {
-          machine.CyanSerialNo = model.CyanSerialNo;
-          machine.MagentaSerialNo = model.MagentaSerialNo;
-          machine.YellowSerialNo = model.YellowSerialNo;
-          machine.BlackSerialNo = model.BlackSerialNo;
+          machine.CyanModelNo = model.CyanModelNo;
+          machine.MagentaModelNo = model.MagentaModelNo;
+          machine.YellowModelNo = model.YellowModelNo;
+          machine.BlackModelNo = model.BlackModelNo;
           machine.ColourPaperRate = model.ColourPaperRate;
         }
 
@@ -207,7 +207,7 @@ namespace TonerTracker.API.Controllers
     #endregion DeleteMachine
 
     #region IfMachineDuplicate
-    private async Task<bool> IfMachineDuplicate(MachineDto model)
+    private async Task<bool> IfMachineDuplicate(Machine model)
     {
       var machine = await context.MachineRepository.FirstOrDefaultAsync(m => m.MachineSerialNo == model.MachineSerialNo);
 

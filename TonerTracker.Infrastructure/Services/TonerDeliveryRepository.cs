@@ -3,6 +3,7 @@ using TonerTracker.DAL;
 using TonerTracker.Domain.Dto;
 using TonerTracker.Domain.Entity;
 using TonerTracker.Infrastructure.Contracts;
+using TonerTracker.Utilities.Constant;
 
 namespace TonerTracker.Infrastructure.Services
 {
@@ -29,7 +30,7 @@ namespace TonerTracker.Infrastructure.Services
                List<SideMenuMachine> sideMenuMachines = new List<SideMenuMachine>();
                foreach (var machine in machines)
                {
-                  sideMenuMachines.Add(new SideMenuMachine { ID = machine.ID, MachineSerialNo = machine.MachineSerialNo, BranchId = machine.BranchID });
+                  sideMenuMachines.Add(new SideMenuMachine { ID = machine.ID, MachineSerialNo = machine.MachineSerialNo, BranchId = machine.BranchID  });
                }
 
                sideMenuBranches.Add(new SideMenuBranch { ID = branch.ID, BranchName = branch.BranchName, CompanyId = branch.CompanyID, Machines = sideMenuMachines });

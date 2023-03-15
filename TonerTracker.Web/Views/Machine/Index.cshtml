@@ -31,7 +31,7 @@
                   <th scope="col">Branch Name</th>
                   <th scope="col">Machine Model</th>
                   <th scope="col">Machine Serial No</th>
-                  <th scope="col">BW Serial No</th>
+                  <th scope="col">BW Model No</th>
                   <th scope="col">Action</th>
                </tr>
             </thead>
@@ -48,7 +48,7 @@
                         <td>
                            <a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.MachineSerialNo</a>
                         </td>
-                        <td>@item.BWSerialNo</td>
+                        <td>@item.BWModelNo</td>
                         <td>
                            <a asp-action="Update" asp-route-id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
                               <i class="fas fa-pen"></i>
@@ -83,10 +83,10 @@
                   <th scope="col">Machine Serial No</th>
                   @*<th scope="col">Paper Rate</th>*@
                   @*<th scope="col">Colour Type</th>*@
-                  <th scope="col">Cyan SerialNo</th>
-                  <th scope="col">Magenta SerialNo</th>
-                  <th scope="col">Yellow SerialNo</th>
-                  <th scope="col">Black SerialNo</th>
+                  <th scope="col">Cyan Model No</th>
+                  <th scope="col">Magenta Model No</th>
+                  <th scope="col">Yellow Model No</th>
+                  <th scope="col">Black Model No</th>
                   <th scope="col">Action</th>
                </tr>
             </thead>
@@ -105,10 +105,10 @@
                         </td>
                         @*<td>@item.ColourPaperRate</td>*@
                         @*<td>@item.ColourType</td>*@
-                        <td>@item.CyanSerialNo</td>
-                        <td>@item.MagentaSerialNo</td>
-                        <td>@item.YellowSerialNo</td>
-                        <td>@item.BlackSerialNo</td>
+                        <td>@item.CyanModelNo</td>
+                        <td>@item.MagentaModelNo</td>
+                        <td>@item.YellowModelNo</td>
+                        <td>@item.BlackModelNo</td>
                         <td>
                            <a asp-action="Update" asp-route-Id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
                               <i class="fas fa-pen"></i>

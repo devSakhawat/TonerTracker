@@ -20,16 +20,16 @@ namespace TonerTracker.Web.HttpClients
       #endregion Constructor
 
       #region CreateCompany
-      public async Task<CompanyDto> CreateCompany(CompanyDto model)
+      public async Task<Company> CreateCompany(Company model)
       {
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PostAsync($"{baseApi}company", content);
 
          if (!response.IsSuccessStatusCode)
-            return new CompanyDto();
+            return new Company();
          string result = await response.Content.ReadAsStringAsync();
-         var company = JsonConvert.DeserializeObject<CompanyDto>(result);
+         var company = JsonConvert.DeserializeObject<Company>(result);
          return company;
       }
       #endregion CreateCompany
@@ -48,45 +48,45 @@ namespace TonerTracker.Web.HttpClients
       #endregion ReadCompanies
 
       #region ReadCompanyByKey
-      public async Task<CompanyDto> ReadCompanyByKey(int id)
+      public async Task<Company> ReadCompanyByKey(int id)
       {
          var response = await client.GetAsync($"{baseApi}company/key/" + id + "");
          if (!response.IsSuccessStatusCode)
-            return new CompanyDto();
+            return new Company();
          var result = await response.Content.ReadAsStringAsync();
-         var company = JsonConvert.DeserializeObject<CompanyDto>(result);
+         var company = JsonConvert.DeserializeObject<Company>(result);
          return company;
       }
       #endregion ReadCompanyByKey
 
       #region UpdateCompany
-      public async Task<CompanyDto> UpdateCompany(CompanyDto model)
+      public async Task<Company> UpdateCompany(Company model)
       {
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PutAsync($"{baseApi}company/" + model.ID, content);
 
          if (response.ReasonPhrase == "BadRequest" || !response.IsSuccessStatusCode)
-            return new CompanyDto();
+            return new Company();
 
          var result = await response.Content.ReadAsStringAsync();
-         var company = JsonConvert.DeserializeObject<CompanyDto>(result);
+         var company = JsonConvert.DeserializeObject<Company>(result);
          return company;
       }
       #endregion UpdateCompany
 
       #region DeleteCompany
-      public async Task<CompanyDto> DeleteCompany(CompanyDto model)
+      public async Task<Company> DeleteCompany(Company model)
       {
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PatchAsync($"{baseApi}company/" + model.ID, content);
 
          if (!response.IsSuccessStatusCode)
-            return new CompanyDto();
+            return new Company();
 
          var result = await response.Content.ReadAsStringAsync();
-         var company = JsonConvert.DeserializeObject<CompanyDto>(result);
+         var company = JsonConvert.DeserializeObject<Company>(result);
          return company;
       }
       #endregion DeleteCompany

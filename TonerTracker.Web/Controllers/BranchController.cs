@@ -30,7 +30,7 @@ namespace TonerTracker.Web.Controllers
 
       [HttpPost]
       [ValidateAntiForgeryToken]
-      public async Task<IActionResult> Create(BranchDto model)
+      public async Task<IActionResult> Create(Branch model)
       {
          if (ModelState.IsValid)
          {
@@ -216,7 +216,7 @@ namespace TonerTracker.Web.Controllers
       }
       #endregion Detail
 
-      //#region BranchesByCompanyID
+      #region BranchesByCompanyID
       //[HttpGet]
       //public async Task<IActionResult> BranchesByCompanyID(int companyId)
       //{
@@ -243,6 +243,6 @@ namespace TonerTracker.Web.Controllers
       //      return View();
       //   }
       //}
-      //#endregion BranchesByCompanyID
+      #endregion BranchesByCompanyID
    }
 }

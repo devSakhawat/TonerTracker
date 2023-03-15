@@ -19,15 +19,15 @@ namespace TonerTracker.Web.HttpClients
       #endregion Constructor
 
       #region CreateBranch
-      public async Task<BranchDto> CreateBranch(BranchDto model)
+      public async Task<Branch> CreateBranch(Branch model)
       {
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PostAsync($"{baseApi}branch", content);
          if (!response.IsSuccessStatusCode)
-            return new BranchDto();
+            return new Branch();
          var result = await response.Content.ReadAsStringAsync();
-         var branch = JsonConvert.DeserializeObject<BranchDto>(result);
+         var branch = JsonConvert.DeserializeObject<Branch>(result);
          return branch;
       }
       #endregion CreateBranch

@@ -21,7 +21,7 @@ namespace TonerTracker.API.Controllers
       #region CreateBranch
       [Route(RouteConstant.CreateBranch)]
       [HttpPost]
-      public async Task<IActionResult> CreateBranch(BranchDto model)
+      public async Task<IActionResult> CreateBranch(Branch model)
       {
          try
          {
@@ -199,7 +199,7 @@ namespace TonerTracker.API.Controllers
       #endregion BranchesByCompanyID
 
       #region IfBrachDuplicate
-      private async Task<bool> IfBrachDuplicate(BranchDto model)
+      private async Task<bool> IfBrachDuplicate(Branch model)
       {
          var branch = await context.BranchRepository.FirstOrDefaultAsync(b => b.BranchName.ToLower().Trim() == model.BranchName.ToLower().Trim() && b.IsDeleted == false);
 

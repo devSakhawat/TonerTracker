@@ -37,19 +37,19 @@ namespace TonerTracker.Web.Controllers
 
       [HttpPost]
       [ValidateAntiForgeryToken]
-      public async Task<IActionResult> Create(MachineDto model)
+      public async Task<IActionResult> Create(Machine model)
       {
          if (ModelState.IsValid)
          {
             var machine = await new MachineHttpClient(client).CreateMachine(model);
 
-
-            if (machine.ErrorMessage != null)
-            {
-               TempData[SessionConstant.Message] = machine.ErrorMessage;
-               return View(model);
-            }
-            else if (machine.ID == 0 || machine == null)
+            //if (machine.ErrorMessage != null)
+            //{
+            //   TempData[SessionConstant.Message] = machine.ErrorMessage;
+            //   return View(model);
+            //}
+            //else 
+            if (machine.ID == 0 || machine == null)
             {
                TempData[SessionConstant.Message] = MessageConstants.UnauthorizedAttemptOfRecordInsert;
                return View(model);
@@ -120,7 +120,7 @@ namespace TonerTracker.Web.Controllers
 
       [HttpPost]
       [ValidateAntiForgeryToken]
-      public async Task<IActionResult> Update(MachineDto model)
+      public async Task<IActionResult> Update(Machine model)
       {
          if(ModelState.IsValid)
          {

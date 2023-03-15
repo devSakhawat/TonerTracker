@@ -10,6 +10,7 @@ namespace TonerTracker.Domain.Entity
       public int? ModifiedBy { get; set; }
       [DataType(DataType.Date)]
       public DateTime? DateModified { get; set; }
+      //public string? ErrorMessage { get; set; }
       public bool IsDeleted { get; set; }
    }
 }

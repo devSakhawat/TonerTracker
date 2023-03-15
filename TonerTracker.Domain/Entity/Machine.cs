@@ -32,27 +32,27 @@ namespace TonerTracker.Domain.Entity
      // [Required(ErrorMessage = "Toner BW SerialNo" + ModelValidationConstant.ValidationConstant)]
       [StringLength(100)]
       [Display(Name = "BW SerialNo")]
-      public string? BWSerialNo { get; set; }
+      public string? BWModelNo { get; set; }
 
       //[Required(ErrorMessage = "Toner Cyan SerialNo" + ModelValidationConstant.ValidationConstant)]
       [StringLength(100)]
       [Display(Name = "Cyan SerialNo")]
-      public string? CyanSerialNo { get; set; }
+      public string? CyanModelNo { get; set; }
 
       //[Required(ErrorMessage = "Toner Magenta SerialNo" + ModelValidationConstant.ValidationConstant)]
       [StringLength(100)]
       [Display(Name = "Magenta SerialNo")]
-      public string? MagentaSerialNo { get; set; }
+      public string? MagentaModelNo { get; set; }
 
       //[Required(ErrorMessage = "Toner Yellow SerialNo" + ModelValidationConstant.ValidationConstant)]
       [StringLength(100)]
       [Display(Name = "Yellow SerialNo")]
-      public string? YellowSerialNo { get; set; }
+      public string? YellowModelNo { get; set; }
 
       //[Required(ErrorMessage = "Toner Black SerialNo" + ModelValidationConstant.ValidationConstant)]
       [StringLength(100)]
       [Display(Name = "Black SerialNo")]
-      public string? BlackSerialNo { get; set; }
+      public string? BlackModelNo { get; set; }
 
       // for generate bill.
       //[Required(ErrorMessage = "Paper rate" + ModelValidationConstant.ValidationConstant)]

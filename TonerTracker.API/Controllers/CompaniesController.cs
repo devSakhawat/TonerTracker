@@ -22,7 +22,7 @@ namespace TonerTracker.API.Controllers
       #region CreateCompany
       [Route(RouteConstant.CreateCompany)]
       [HttpPost]
-      public async Task<IActionResult> CreateCompany(CompanyDto model)
+      public async Task<IActionResult> CreateCompany(Company model)
       {
          try
          {
@@ -104,7 +104,7 @@ namespace TonerTracker.API.Controllers
       #region UpdateCompany
       [Route(RouteConstant.UpdateCompany)]
       [HttpPut]
-      public async Task<IActionResult> UpdateCompany(int key, CompanyDto model)
+      public async Task<IActionResult> UpdateCompany(int key, Company model)
       {
          try
          {
@@ -137,7 +137,7 @@ namespace TonerTracker.API.Controllers
       #region DeleteCompany
       [Route(RouteConstant.DeleteCompany)]
       [HttpPatch]
-      public async Task<IActionResult> DeleteCompnay(CompanyDto model)
+      public async Task<IActionResult> DeleteCompnay(Company model)
       {
          try
          {
@@ -163,7 +163,7 @@ namespace TonerTracker.API.Controllers
       #endregion DeleteCompany
 
       #region IsCompanyDuplicate
-      private async Task<bool> IsCompanyDuplicate(CompanyDto model)
+      private async Task<bool> IsCompanyDuplicate(Company model)
       {
          var company = await context.CompanyRepository.FirstOrDefaultAsync(b => b.CompanyName == model.CompanyName && b.IsDeleted == false);
          if (company != null)

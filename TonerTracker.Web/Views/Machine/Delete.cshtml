@@ -1,4 +1,4 @@
-﻿@model TonerTracker.Domain.Dto.MachineDto
+﻿@model TonerTracker.Domain.Entity.Machine
 @using TonerTracker.Domain.Entity
 @using TonerTracker.Utilities.Constant
 
@@ -48,31 +48,31 @@
                   {
                      <!-- BWSerialNo-->
                      <div class="row">
-                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.BWSerialNo) : </div>
-                        <div class="col-6 text-start">@Html.DisplayFor(model => model.BWSerialNo)</div>
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.BWModelNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.BWModelNo)</div>
                      </div>
                   }
                   @if (Model.ColourType == ColourType.Colour)
                   {
                      <!-- CyanSerialNo-->
                      <div class="row">
-                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.CyanSerialNo) : </div>
-                        <div class="col-6 text-start">@Html.DisplayFor(model => model.CyanSerialNo)</div>
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.CyanModelNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.CyanModelNo)</div>
                      </div>
                      <!-- MagentaSerialNo -->
                      <div class="row">
-                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.MagentaSerialNo) : </div>
-                        <div class="col-6 text-start">@Html.DisplayFor(model => model.MagentaSerialNo)</div>
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.MagentaModelNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.MagentaModelNo)</div>
                      </div>
                      <!-- YellowSerialNo -->
                      <div class="row">
-                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.YellowSerialNo) : </div>
-                        <div class="col-6 text-start">@Html.DisplayFor(model => model.YellowSerialNo)</div>
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.YellowModelNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.YellowModelNo)</div>
                      </div>
                      <!-- BlackSerialNo -->
                      <div class="row">
-                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.BlackSerialNo) : </div>
-                        <div class="col-6 text-start">@Html.DisplayFor(model => model.BlackSerialNo)</div>
+                        <div class="col-6 text-end">@Html.DisplayNameFor(model => model.YellowModelNo) : </div>
+                        <div class="col-6 text-start">@Html.DisplayFor(model => model.YellowModelNo)</div>
                      </div>
                   }
                   <!--ACTION:-->

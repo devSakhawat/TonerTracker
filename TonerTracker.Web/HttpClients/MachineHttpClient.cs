@@ -20,26 +20,26 @@ namespace TonerTracker.Web.HttpClients
       #endregion Constructor
 
       #region CreateMachine
-      public async Task<MachineDto> CreateMachine(MachineDto model)
+      public async Task<Machine> CreateMachine(Machine model)
       {
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PostAsync($"{baseApi}machine", content);
 
-         if (response.ReasonPhrase == "Conflict")
-         {
-            MachineDto machineDto = new MachineDto
-            {
-               ErrorMessage = MessageConstants.DuplicateError
-            };
-            return machineDto;
-         }
+         //if (response.ReasonPhrase == "Conflict")
+         //{
+         //   Machine machineObj = new Machine
+         //   {
+         //      ErrorMessage = MessageConstants.DuplicateError
+         //   };
+         //   return machineObj;
+         //}
 
          if (!response.IsSuccessStatusCode)
-            return new MachineDto();
+            return new Machine();
 
          string result = await response.Content.ReadAsStringAsync();
-         var machine = JsonConvert.DeserializeObject<MachineDto>(result);
+         var machine = JsonConvert.DeserializeObject<Machine>(result);
          return machine;
       }
       #endregion CreateMachine
@@ -60,47 +60,47 @@ namespace TonerTracker.Web.HttpClients
       #endregion ReadMachines
 
       #region ReadMachineByKey
-      public async Task<MachineDto> ReadMachineByKey(int id)
+      public async Task<Machine> ReadMachineByKey(int id)
       {
          var response = await client.GetAsync($"{baseApi}machine/key/" + id + "");
 
          if (!response.IsSuccessStatusCode)
-            return new MachineDto();
+            return new Machine();
 
          string result = await response.Content.ReadAsStringAsync();
-         var machine = JsonConvert.DeserializeObject<MachineDto>(result);
+         var machine = JsonConvert.DeserializeObject<Machine>(result);
          return machine;
       }
       #endregion ReadMachineByKey
 
       #region UpdateMachine
-      public async Task<MachineDto> UpdateMachine(MachineDto model)
+      public async Task<Machine> UpdateMachine(Machine model)
       {
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PutAsync($"{baseApi}machine/" + model.ID, content);
 
          if (!response.IsSuccessStatusCode)
-            return new MachineDto();
+            return new Machine();
 
          string result = await response.Content.ReadAsStringAsync();
-         var machine = JsonConvert.DeserializeObject<MachineDto>(result);
+         var machine = JsonConvert.DeserializeObject<Machine>(result);
          return machine;
       }
       #endregion UpdateMachine
 
       #region DeleteMachine
-      public async Task<MachineDto> DeleteMachine(MachineDto model)
+      public async Task<Machine> DeleteMachine(Machine model)
       {
          var data = JsonConvert.SerializeObject(model);
          var content = new StringContent(data, Encoding.UTF8, "application/json");
          var response = await client.PatchAsync($"{baseApi}machine/" + model.ID, content);
 
          if (!response.IsSuccessStatusCode)
-            return new MachineDto();
+            return new Machine();
 
          string result = await response.Content.ReadAsStringAsync();
-         var machine = JsonConvert.DeserializeObject<MachineDto>(result);
+         var machine = JsonConvert.DeserializeObject<Machine>(result);
          return machine;
       }
       #endregion DeleteMachine

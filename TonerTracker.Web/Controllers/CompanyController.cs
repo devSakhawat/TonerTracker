@@ -20,12 +20,12 @@ namespace TonerTracker.Web.Controllers
       [HttpGet]
       public IActionResult Create()
       {
-         return View(new CompanyDto());
+         return View(new Company());
       }
 
       [ValidateAntiForgeryToken]
       [HttpPost]
-      public async Task<IActionResult> Create(CompanyDto model)
+      public async Task<IActionResult> Create(Company model)
       {
          if (ModelState.IsValid)
          {
@@ -98,7 +98,7 @@ namespace TonerTracker.Web.Controllers
 
       [HttpPost]
       [ValidateAntiForgeryToken]
-      public async Task<IActionResult> Update(CompanyDto model)
+      public async Task<IActionResult> Update(Company model)
       {
          if(ModelState.IsValid)
          {
@@ -152,7 +152,7 @@ namespace TonerTracker.Web.Controllers
       }
 
       [HttpPost]
-      public async Task<IActionResult> Delete(CompanyDto model)
+      public async Task<IActionResult> Delete(Company model)
       {
          try
          {

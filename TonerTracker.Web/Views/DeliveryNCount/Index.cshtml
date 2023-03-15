@@ -1,4 +1,4 @@
-﻿@using TonerTracker.Domain.Dto
+﻿@*@using TonerTracker.Domain.Dto
 @using TonerTracker.Domain.Entity;
 @using TonerTracker.Utilities.Constant
 @model DeliveryNCountDto
@@ -53,7 +53,7 @@
                         <div class="nav-item dropdown">
                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>@branch.BranchName</a>
                         </div>
-                     }
+                     }*@
                      
                      
                      @*<div class="dropdown-menu bg-transparent border-0">
@@ -108,7 +108,7 @@
                   </div>
                </div>*@
 
-            </div>
+          @*  </div>
          </nav>
       </div>
       <!-- Sidebar End -->
@@ -265,12 +265,12 @@
                                     <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger mt-1 mb-1">
                                        <i class="fas fa-trash"></i>
                                        Delete
-                                    </a>
+                                    </a>*@
                                     @*<a asp-controller="TonerDelivery" asp-action="Create" asp-route-machineId="@item.ID" class="btn btn-sm btn-info mt-1 mb-1">
                               <i class="fas fa-list-ul"></i>
                               Toner Delivery
                               </a>*@
-                                 </td>
+                                @* </td>
                               </tr>
                            }
                         </tbody>
@@ -308,17 +308,17 @@
                                  <td><a class="detail-link" asp-action="Detail" asp-route-Id="@item.ID">@item.StockBlack</a></td>
                                  <td>
                                     <a asp-action="Update" asp-route-Id="@item.ID" class="btn btn-sm btn-primary mt-1 mb-1">
-                                       <i class="fas fa-pen"></i>
+                                       <i class="fas fa-pen"></i>*@
                                        @* Update*@
-                                    </a>
+                                    @*</a>
                                     <a asp-action="Detail" asp-route-Id="@item.ID" class="btn btn-sm btn-success mt-1 mb-1">
-                                       <i class="fas fa-info-circle"></i>
+                                       <i class="fas fa-info-circle"></i>*@
                                        @*Detail*@
-                                    </a>
+                                    @*</a>
                                     <a asp-action="Delete" asp-route-Id="@item.ID" class="btn btn-sm btn-danger mt-1 mb-1">
-                                       <i class="fas fa-trash"></i>
+                                       <i class="fas fa-trash"></i>*@
                                        @*Delete*@
-                                    </a>
+@*                                    </a>
                                  </td>
                               </tr>
                            }
@@ -344,7 +344,6 @@
                      &copy; <a href="#">Your Site Name</a>, All Right Reserved.
                   </div>
                   <div class="col-12 col-sm-6 text-center text-sm-end">
-                     <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                      Designed By <a href="https://htmlcodex.com">HTML Codex</a>
                      <br>Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
                   </div>
@@ -361,7 +360,7 @@
    <script src="~/lib/jquery/dist/jquery.min.js"></script>
    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
    <script src="~/js/dark-pan.js"></script>
-   <script src="~/js/site.js" asp-append-version="true"></script>
+   <script src="~/js/site.js" asp-append-version="true"></script>*@
   @* @await RenderSectionAsync("Scripts", required: false)*@
-</body>
-</html>
+@*</body>
+</html>*@

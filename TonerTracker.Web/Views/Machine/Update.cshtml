@@ -1,4 +1,4 @@
-﻿@model TonerTracker.Domain.Dto.MachineDto
+﻿@model TonerTracker.Domain.Entity.Machine
 @using TonerTracker.Utilities.Constant
 
 @{
@@ -89,10 +89,10 @@
 
                   <!-- BW Toner Serial No -->
                   <div class="row mb-3 bwToner">
-                     <label for="bwSerialNo" class="col-4 col-form-label" asp-for="BWSerialNo"></label>
+                     <label for="bwModelNo" class="col-4 col-form-label" asp-for="BWModelNo"></label>
                      <div class="col-8">
-                        <input type="text" class="form-control theme-black" id="bwSerialNo" asp-for="BWSerialNo" />
-                        <span asp-validation-for="BWSerialNo" class="text-danger"></span>
+                        <input type="text" class="form-control theme-black" id="bwModelNo" asp-for="BWModelNo" />
+                        <span asp-validation-for="BWModelNo" class="text-danger"></span>
                      </div>
                   </div>
                }
@@ -103,44 +103,44 @@
                   <div class="row mb-3 colourPaperRate">
                      <label for="colourPaperRate" class="col-4 col-form-label" asp-for="ColourPaperRate"></label>
                      <div class="col-8">
-                        <input type="text" class="form-control theme-black" id="colourPaperRate" asp-for="ColourPaperRate" />
+                        <input type="text" class="form-control theme-black" id="colourPaperRate" asp-for="ColourPaperRate" placeholder="Enter bw model no.." />
                         <span asp-validation-for="ColourPaperRate" class="text-danger"></span>
                      </div>
                   </div>
 
                   <!-- Cyan Toner Serial No -->
                   <div class="row mb-3 cyanToner">
-                     <label for="cyanSerialNo" class="col-4 col-form-label" asp-for="CyanSerialNo"></label>
+                     <label for="cyanModelNo" class="col-4 col-form-label" asp-for="CyanModelNo"></label>
                      <div class="col-8">
-                        <input type="text" class="form-control theme-black" id="cyanSerialNo" asp-for="CyanSerialNo" />
-                        <span asp-validation-for="CyanSerialNo" class="text-danger"></span>
+                        <input type="text" class="form-control theme-black" id="cyanModelNo" asp-for="CyanModelNo" placeholder="Enter cyan model no.." />
+                        <span asp-validation-for="CyanModelNo" class="text-danger"></span>
                      </div>
                   </div>
 
                   <!-- Magenta Toner Serial No -->
                   <div class="row mb-3 magentaToner">
-                     <label for="magentaSerialNo" class="col-4 col-form-label" asp-for="MagentaSerialNo"></label>
+                     <label for="magentaModelNo" class="col-4 col-form-label" asp-for="MagentaModelNo"></label>
                      <div class="col-8">
-                        <input type="text" class="form-control theme-black" id="magentaSerialNo" asp-for="MagentaSerialNo" placeholder="Enter magenta serial no.." />
-                        <span asp-validation-for="MagentaSerialNo" class="text-danger"></span>
+                        <input type="text" class="form-control theme-black" id="magentaModelNo" asp-for="MagentaModelNo" placeholder="Enter magenta model no.." />
+                        <span asp-validation-for="MagentaModelNo" class="text-danger"></span>
                      </div>
                   </div>
 
                   <!-- Yellow Toner Serial No -->
                   <div class="row mb-3 yellowToner">
-                     <label for="yellowSerialNo" class="col-4 col-form-label" asp-for="YellowSerialNo"></label>
+                     <label for="yellowModelNo" class="col-4 col-form-label" asp-for="YellowModelNo"></label>
                      <div class="col-8">
-                        <input type="text" class="form-control theme-black" id="yellowSerialNo" asp-for="YellowSerialNo" placeholder="Enter yellow serial no.." />
-                        <span asp-validation-for="YellowSerialNo" class="text-danger"></span>
+                        <input type="text" class="form-control theme-black" id="yellowModelNo" asp-for="YellowModelNo" placeholder="Enter yellow model no.." />
+                        <span asp-validation-for="YellowModelNo" class="text-danger"></span>
                      </div>
                   </div>
 
                   <!-- Black Toner Serial No -->
                   <div class="row mb-3 blackToner">
-                     <label for="blackSerialNo" class="col-4 col-form-label" asp-for="BlackSerialNo"></label>
+                     <label for="blackModelNo" class="col-4 col-form-label" asp-for="BlackModelNo"></label>
                      <div class="col-8">
-                        <input type="text" class="form-control theme-black" id="blackSerialNo" asp-for="BlackSerialNo" placeholder="Enter black serial no.." />
-                        <span asp-validation-for="BlackSerialNo" class="text-danger"></span>
+                        <input type="text" class="form-control theme-black" id="blackModelNo" asp-for="BlackModelNo" placeholder="Enter black model no.." />
+                        <span asp-validation-for="BlackModelNo" class="text-danger"></span>
                      </div>
                   </div>
                }
